@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Libra Research — Due Diligence &amp; Business Intelligence</title>
+  <meta name="description" content="OSINT-based due diligence and business intelligence for M&A advisors, private equity, law firms, and compliance teams. Analyst-grade reports in 24–48 hours." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:        #161614;
+      --bg-2:      #1e1e1b;
+      --ink:       #f7f5f0;
+      --ink-soft:  #c8c8c6;
+      --ink-muted: rgba(247,245,240,0.42);
+      --hair:      rgba(247,245,240,0.10);
+      --hair-s:    rgba(247,245,240,0.18);
+      --accent:    #f7f5f0;
+      --serif:     'Spectral', Georgia, serif;
+      --mono:      'IBM Plex Mono', ui-monospace, monospace;
+      --max:       1080px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--serif);
+      font-size: 17px;
+      line-height: 1.6;
+    }
+
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 48px; }
+    @media (max-width: 640px) { .wrap { padding: 0 24px; } }
+
+    .mono { font-family: var(--mono); }
+
+    .kicker {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      font-weight: 500;
+      letter-spacing: 0.30em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg);
+      border-bottom: 1px solid var(--hair);
+    }
+
+    .nav-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 48px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    @media (max-width: 640px) { .nav-inner { padding: 0 24px; } }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+      color: var(--ink);
+    }
+    .nav-logo .mk { width: 30px; height: 30px; }
+    .nav-logo .wm-name {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: 18px;
+      letter-spacing: -0.01em;
+      line-height: 1;
+    }
+    .nav-logo .wm-desc {
+      font-family: var(--mono);
+      font-size: 8.5px;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-top: 4px;
+    }
+
+    .nav-cta {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      border: 1px solid var(--hair-s);
+      padding: 9px 18px;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+    }
+    .nav-cta:hover { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 120px 0 100px;
+      border-bottom: 1px solid var(--hair);
+    }
+    @media (max-width: 640px) { .hero { padding: 80px 0 72px; } }
+
+    .hero-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 48px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 64px;
+      align-items: end;
+    }
+    @media (max-width: 800px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+      .hero-mark { display: none; }
+    }
+    @media (max-width: 640px) { .hero-inner { padding: 0 24px; } }
+
+    .hero-kicker { margin-bottom: 24px; }
+
+    .hero h1 {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: clamp(46px, 7.5vw, 92px);
+      line-height: 0.93;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+    }
+
+    .hero-sub {
+      font-family: var(--serif);
+      font-size: clamp(17px, 1.8vw, 20px);
+      line-height: 1.65;
+      color: var(--ink-soft);
+      max-width: 52ch;
+      margin-top: 28px;
+    }
+
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 44px; }
+
+    .btn-primary {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.20em;
+      text-transform: uppercase;
+      background: var(--ink);
+      color: var(--bg);
+      border: 1px solid var(--ink);
+      padding: 14px 28px;
+      text-decoration: none;
+      display: inline-block;
+      transition: opacity 0.15s;
+    }
+    .btn-primary:hover { opacity: 0.85; }
+
+    .btn-ghost {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.20em;
+      text-transform: uppercase;
+      background: transparent;
+      color: var(--ink);
+      border: 1px solid var(--hair-s);
+      padding: 14px 28px;
+      text-decoration: none;
+      display: inline-block;
+      transition: border-color 0.15s;
+    }
+    .btn-ghost:hover { border-color: rgba(247,245,240,0.45); }
+
+    .hero-mark { width: 180px; height: 180px; color: var(--ink); opacity: 0.12; }
+
+    /* ── STRIP ── */
+    .strip {
+      border-bottom: 1px solid var(--hair);
+      padding: 22px 0;
+    }
+    .strip-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 48px;
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    @media (max-width: 640px) { .strip-inner { padding: 0 24px; gap: 24px; } }
+
+    .strip-item {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+    }
+    .strip-item strong { color: var(--ink); font-weight: 500; }
+
+    /* ── SECTIONS ── */
+    section { padding: 96px 0; border-bottom: 1px solid var(--hair); }
+    @media (max-width: 640px) { section { padding: 64px 0; } }
+
+    .sec-head { margin-bottom: 56px; }
+    .sec-head .kicker { margin-bottom: 16px; }
+    .sec-head h2 {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: clamp(34px, 5vw, 58px);
+      line-height: 1.0;
+      letter-spacing: -0.025em;
+      color: var(--ink);
+    }
+    .sec-head p {
+      font-size: 18px;
+      line-height: 1.65;
+      color: var(--ink-soft);
+      max-width: 56ch;
+      margin-top: 18px;
+    }
+
+    /* ── SERVICES ── */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--hair);
+      border-left: 1px solid var(--hair);
+    }
+    @media (max-width: 860px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px) { .services-grid { grid-template-columns: 1fr; } }
+
+    .svc {
+      border-right: 1px solid var(--hair);
+      border-bottom: 1px solid var(--hair);
+      padding: 36px 32px;
+    }
+    .svc-num {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      color: var(--ink-muted);
+      margin-bottom: 20px;
+    }
+    .svc h3 {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: 19px;
+      line-height: 1.2;
+      margin-bottom: 12px;
+      color: var(--ink);
+    }
+    .svc p {
+      font-size: 15px;
+      line-height: 1.65;
+      color: var(--ink-soft);
+    }
+    .svc-price {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      letter-spacing: 0.14em;
+      color: var(--ink-muted);
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid var(--hair);
+    }
+
+    /* ── HOW ── */
+    .how { background: var(--bg-2); }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid var(--hair);
+    }
+    @media (max-width: 860px) { .steps { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px) { .steps { grid-template-columns: 1fr; } }
+
+    .step {
+      padding: 36px 28px;
+      border-right: 1px solid var(--hair);
+      border-bottom: 1px solid var(--hair);
+    }
+    .step:last-child { border-right: none; }
+    @media (max-width: 860px) {
+      .step:nth-child(2n) { border-right: none; }
+    }
+
+    .step-n {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      color: var(--ink-muted);
+      margin-bottom: 20px;
+    }
+    .step h3 {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: 18px;
+      line-height: 1.2;
+      margin-bottom: 10px;
+      color: var(--ink);
+    }
+    .step p { font-size: 14.5px; line-height: 1.65; color: var(--ink-soft); }
+
+    /* ── CLIENTS ── */
+    .clients-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--hair);
+      border: 1px solid var(--hair);
+    }
+    @media (max-width: 700px) { .clients-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 480px) { .clients-grid { grid-template-columns: 1fr; } }
+
+    .client-tag {
+      background: var(--bg);
+      padding: 22px 24px;
+      font-family: var(--serif);
+      font-size: 16px;
+      color: var(--ink-soft);
+    }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    @media (max-width: 760px) { .about-grid { grid-template-columns: 1fr; gap: 48px; } }
+
+    .about-text p {
+      font-size: 17px;
+      line-height: 1.75;
+      color: var(--ink-soft);
+      margin-bottom: 18px;
+    }
+    .about-text p:last-child { margin-bottom: 0; }
+
+    .credentials { display: flex; flex-direction: column; }
+    .cred {
+      padding: 22px 0;
+      border-bottom: 1px solid var(--hair);
+    }
+    .cred:first-child { border-top: 1px solid var(--hair); }
+    .cred-role {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: 16px;
+      margin-bottom: 5px;
+      color: var(--ink);
+    }
+    .cred-org {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      letter-spacing: 0.14em;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+    }
+
+    /* ── CONTACT ── */
+    .contact { background: var(--bg-2); border-bottom: none; }
+
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    @media (max-width: 760px) { .contact-inner { grid-template-columns: 1fr; gap: 48px; } }
+
+    .contact h2 {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: clamp(36px, 5vw, 58px);
+      line-height: 1.0;
+      letter-spacing: -0.025em;
+      color: var(--ink);
+      margin-bottom: 22px;
+    }
+    .contact p {
+      font-size: 17px;
+      line-height: 1.7;
+      color: var(--ink-soft);
+      max-width: 48ch;
+    }
+
+    .contact-links { display: flex; flex-direction: column; padding-top: 8px; }
+    .contact-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--hair);
+      text-decoration: none;
+      color: var(--ink);
+      transition: opacity 0.15s;
+    }
+    .contact-link:first-child { border-top: 1px solid var(--hair); }
+    .contact-link:hover { opacity: 0.65; }
+    .contact-link .cl-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-bottom: 5px;
+    }
+    .contact-link .cl-val {
+      font-family: var(--serif);
+      font-size: 17px;
+      color: var(--ink);
+    }
+    .contact-link .cl-arr { font-size: 20px; color: var(--ink-muted); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--bg);
+      border-top: 1px solid var(--hair);
+      padding: 28px 0;
+    }
+    .footer-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    @media (max-width: 640px) { .footer-inner { padding: 0 24px; } }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .footer-logo .mk { width: 20px; height: 20px; }
+    .footer-logo .wm {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: 15px;
+      letter-spacing: -0.01em;
+    }
+    .footer-copy {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="#">
+      <div class="mk" data-signal='{"n":4}'></div>
+      <div>
+        <div class="wm-name">Libra</div>
+        <div class="wm-desc">Research</div>
+      </div>
+    </a>
+    <a class="nav-cta" href="#contact">Get in touch</a>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="kicker hero-kicker">Due diligence · Nordics &amp; beyond</div>
+      <h1>Know who<br>you're dealing<br>with.</h1>
+      <p class="hero-sub">Libra Research delivers analyst-grade OSINT due diligence reports on companies and individuals — so you can act with confidence.</p>
+      <div class="hero-actions">
+        <a class="btn-primary" href="#contact">Commission a report</a>
+        <a class="btn-ghost" href="#services">Our services</a>
+      </div>
+    </div>
+    <div class="hero-mark" data-signal='{"n":4}'></div>
+  </div>
+</div>
+
+<!-- ── STRIP ── -->
+<div class="strip">
+  <div class="strip-inner">
+    <div class="strip-item"><strong>24–48 h</strong> turnaround</div>
+    <div class="strip-item"><strong>100%</strong> open-source methodology</div>
+    <div class="strip-item"><strong>Fully</strong> auditable</div>
+    <div class="strip-item">Based in <strong>Oslo, Norway</strong></div>
+  </div>
+</div>
+
+<!-- ── SERVICES ── -->
+<section id="services">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Services</div>
+      <h2>What we deliver.</h2>
+      <p>Structured, source-cited reports built on open-source intelligence. Every finding documented, every source traceable.</p>
+    </div>
+    <div class="services-grid">
+      <div class="svc">
+        <div class="svc-num">01</div>
+        <h3>Corporate Due Diligence</h3>
+        <p>Ownership structure, key personnel, litigation history, adverse media, and reputational risk — consolidated in one report.</p>
+        <div class="svc-price">From NOK 4,000</div>
+      </div>
+      <div class="svc">
+        <div class="svc-num">02</div>
+        <h3>Enhanced Due Diligence</h3>
+        <p>Deep-dive investigation for higher-risk counterparties. Source-of-wealth, PEP exposure, sanctions screening, and layered ownership analysis.</p>
+        <div class="svc-price">From NOK 10,000</div>
+      </div>
+      <div class="svc">
+        <div class="svc-num">03</div>
+        <h3>Adverse Media &amp; Sanctions Screening</h3>
+        <p>Systematic sweep across global media, regulatory databases, and sanctions lists. Delivered as a concise risk summary.</p>
+        <div class="svc-price">From NOK 2,000</div>
+      </div>
+      <div class="svc">
+        <div class="svc-num">04</div>
+        <h3>Beneficial Ownership Mapping</h3>
+        <p>UBO tracing through corporate layers, nominees, and jurisdictions. Available standalone or included in CDD/EDD reports.</p>
+        <div class="svc-price">Included in CDD · standalone on request</div>
+      </div>
+      <div class="svc">
+        <div class="svc-num">05</div>
+        <h3>Monitoring Retainer</h3>
+        <p>Ongoing surveillance of a subject — new adverse media, ownership changes, regulatory actions — reported on a monthly cadence.</p>
+        <div class="svc-price">From NOK 3,000 / month</div>
+      </div>
+      <div class="svc">
+        <div class="svc-num">06</div>
+        <h3>Bespoke Research</h3>
+        <p>Custom intelligence briefs for specific mandates — pre-litigation profiling, competitive intelligence, or M&amp;A target screening.</p>
+        <div class="svc-price">Quoted on request</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW ── -->
+<section class="how" id="methodology">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Methodology</div>
+      <h2>How we work.</h2>
+      <p>Every report follows a structured process — no assumptions, no unverified claims. Sources cited throughout.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-n">01</div>
+        <h3>Brief</h3>
+        <p>You tell us who or what to investigate and what decisions are riding on the findings.</p>
+      </div>
+      <div class="step">
+        <div class="step-n">02</div>
+        <h3>Collection</h3>
+        <p>We systematically gather data across corporate registries, court records, media, regulatory filings, and open databases.</p>
+      </div>
+      <div class="step">
+        <div class="step-n">03</div>
+        <h3>Analysis</h3>
+        <p>Raw findings are verified, cross-referenced, and assessed for materiality. Every red flag is evaluated in context.</p>
+      </div>
+      <div class="step">
+        <div class="step-n">04</div>
+        <h3>Report</h3>
+        <p>A structured, cited report lands in your inbox within 24–48 hours. Ready to act on.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CLIENTS ── -->
+<section id="clients">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Who we work with</div>
+      <h2>Built for professionals<br>who need certainty.</h2>
+    </div>
+    <div class="clients-grid">
+      <div class="client-tag">M&amp;A advisors</div>
+      <div class="client-tag">Private equity firms</div>
+      <div class="client-tag">Law firms</div>
+      <div class="client-tag">Compliance teams</div>
+      <div class="client-tag">Fintech lenders</div>
+      <div class="client-tag">Corporate development</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ABOUT ── -->
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">About</div>
+      <h2>Serious research.<br>No fluff.</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>Libra Research is an independent due diligence practice based in Oslo. We produce structured, analyst-grade reports on companies and individuals using open-source intelligence — fully auditable, no proprietary black boxes.</p>
+        <p>Our methodology is built on the same principles used in regulated financial crime investigations: systematic collection, rigorous verification, and clear documentation of every source. What you receive is a report you can stand behind.</p>
+        <p>We work with clients across the Nordics and internationally, on mandates ranging from pre-acquisition screening to ongoing counterparty monitoring.</p>
+      </div>
+      <div class="credentials">
+        <div class="cred">
+          <div class="cred-role">FCP Investigator</div>
+          <div class="cred-org">Morrow Bank ASA · 2025–present</div>
+        </div>
+        <div class="cred">
+          <div class="cred-role">Infantry Soldier</div>
+          <div class="cred-org">Norwegian Armed Forces · 2026–present</div>
+        </div>
+        <div class="cred">
+          <div class="cred-role">Founded</div>
+          <div class="cred-org">Oslo, Norway · 2026</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="contact-inner">
+      <div>
+        <h2>Start a conversation.</h2>
+        <p>Tell us what you need to know. We'll confirm scope and turnaround within one business day.</p>
+      </div>
+      <div class="contact-links">
+        <a class="contact-link" href="mailto:gobeladriannyrud@gmail.com">
+          <div>
+            <div class="cl-label">Email</div>
+            <div class="cl-val">gobeladriannyrud@gmail.com</div>
+          </div>
+          <span class="cl-arr">→</span>
+        </a>
+        <a class="contact-link" href="https://www.linkedin.com/company/libra-research" target="_blank" rel="noopener">
+          <div>
+            <div class="cl-label">LinkedIn</div>
+            <div class="cl-val">Libra Research</div>
+          </div>
+          <span class="cl-arr">→</span>
+        </a>
+        <a class="contact-link" href="#">
+          <div>
+            <div class="cl-label">Location</div>
+            <div class="cl-val">Oslo, Norway</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <a class="footer-logo" href="#">
+      <div class="mk" data-signal='{"n":4}'></div>
+      <span class="wm">Libra Research</span>
+    </a>
+    <span class="footer-copy">Oslo · Norway · 2026</span>
+  </div>
+</footer>
+
+<script>
+/* Libra Research — Signal mark renderer */
+(function () {
+  var NS = 'http://www.w3.org/2000/svg';
+  function el(name, attrs) {
+    var e = document.createElementNS(NS, name);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    return e;
+  }
+  function signalSVG(o) {
+    o = o || {};
+    var n        = o.n        != null ? o.n        : 4;
+    var fillRow  = o.fillRow  != null ? o.fillRow  : 2;
+    var fillCol  = o.fillCol  != null ? o.fillCol  : 3;
+    var padding  = o.padding  != null ? o.padding  : 16;
+    var dotScale = o.dotScale != null ? o.dotScale : 0.30;
+    var fillScale= o.fillScale!= null ? o.fillScale: 1.0;
+    var svg = el('svg', { viewBox: '0 0 100 100', fill: 'none', 'aria-hidden': 'true' });
+    svg.style.cssText = 'width:100%;height:100%;display:block;';
+    var span  = 100 - padding * 2;
+    var pitch = n > 1 ? span / (n - 1) : 0;
+    var r     = pitch * dotScale;
+    var sw    = Math.max(1.05, r * 0.17);
+    for (var row = 1; row <= n; row++) {
+      for (var col = 1; col <= n; col++) {
+        var cx = padding + (col - 1) * pitch;
+        var cy = padding + (row - 1) * pitch;
+        var isFill = row === fillRow && col === fillCol;
+        if (isFill) {
+          svg.appendChild(el('circle', { cx: cx, cy: cy, r: r * fillScale, fill: 'currentColor' }));
+        } else {
+          svg.appendChild(el('circle', { cx: cx, cy: cy, r: r, stroke: 'currentColor', 'stroke-width': sw, fill: 'none' }));
+        }
+      }
+    }
+    return svg;
+  }
+  function renderAll() {
+    document.querySelectorAll('[data-signal]').forEach(function (t) {
+      var o = t.getAttribute('data-signal');
+      t.innerHTML = '';
+      t.appendChild(signalSVG(o ? JSON.parse(o) : {}));
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', renderAll);
+  } else {
+    renderAll();
+  }
+})();
+</script>
+
+</body>
+</html>
