@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <style>
+    .o { fill: none; stroke: #1b1a17; stroke-width: 2.2; }
+    .f { fill: #1b1a17; }
+    @media (prefers-color-scheme: dark) {
+      .o { stroke: #f7f5f0; }
+      .f { fill: #f7f5f0; }
+    }
+  </style>
+  <g class="o">
+    <circle cx="10" cy="10" r="8"/><circle cx="36.67" cy="10" r="8"/><circle cx="63.33" cy="10" r="8"/><circle cx="90" cy="10" r="8"/>
+    <circle cx="10" cy="36.67" r="8"/><circle cx="36.67" cy="36.67" r="8"/><circle cx="90" cy="36.67" r="8"/>
+    <circle cx="10" cy="63.33" r="8"/><circle cx="36.67" cy="63.33" r="8"/><circle cx="63.33" cy="63.33" r="8"/><circle cx="90" cy="63.33" r="8"/>
+    <circle cx="10" cy="90" r="8"/><circle cx="36.67" cy="90" r="8"/><circle cx="63.33" cy="90" r="8"/><circle cx="90" cy="90" r="8"/>
+  </g>
+  <circle class="f" cx="63.33" cy="36.67" r="8"/>
+</svg>

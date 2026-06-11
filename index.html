@@ -1,840 +1,340 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Libra Research — Due Diligence &amp; Business Intelligence</title>
-  <meta name="description" content="OSINT-based due diligence and business intelligence for M&A advisors, private equity, law firms, and compliance teams. Analyst-grade reports in 24–48 hours." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --bg:        #161614;
-      --bg-2:      #1e1e1b;
-      --ink:       #f7f5f0;
-      --ink-soft:  #c8c8c6;
-      --ink-muted: rgba(247,245,240,0.42);
-      --hair:      rgba(247,245,240,0.10);
-      --hair-s:    rgba(247,245,240,0.18);
-      --accent:    #f7f5f0;
-      --serif:     'Spectral', Georgia, serif;
-      --mono:      'IBM Plex Mono', ui-monospace, monospace;
-      --max:       1080px;
-    }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Libra Research — OSINT Due Diligence &amp; Business Intelligence, Oslo</title>
+  <meta name="description" content="Independent OSINT due diligence on companies and individuals. Analyst-grade, source-cited reports for M&A advisors, private equity, law firms, and compliance teams — delivered in 24–48 hours from Oslo, Norway.">
+  <link rel="canonical" href="https://libraresearch.github.io/">
+  <meta name="theme-color" content="#1b1a17">
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://libraresearch.github.io/">
+  <meta property="og:title" content="Libra Research — OSINT Due Diligence">
+  <meta property="og:description" content="Analyst-grade, source-cited due diligence reports on companies and individuals. 24–48 hour turnaround. Oslo, Norway.">
+  <meta name="twitter:card" content="summary">
 
-    html {
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
-      scroll-behavior: smooth;
-    }
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 
-    body {
-      background: var(--bg);
-      color: var(--ink);
-      font-family: var(--serif);
-      font-size: 17px;
-      line-height: 1.6;
-    }
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 
-    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 48px; }
-    @media (max-width: 640px) { .wrap { padding: 0 24px; } }
+  <link rel="stylesheet" href="css/main.css">
 
-    .mono { font-family: var(--mono); }
-
-    .kicker {
-      font-family: var(--mono);
-      font-size: 10.5px;
-      font-weight: 500;
-      letter-spacing: 0.30em;
-      text-transform: uppercase;
-      color: var(--ink-muted);
-    }
-
-    /* ── NAV ── */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(22,22,20,0.72);
-      -webkit-backdrop-filter: blur(14px);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--hair);
-    }
-
-    .nav-links { display: flex; gap: 28px; margin-left: auto; }
-    @media (max-width: 700px) { .nav-links { display: none; } }
-    .nav-links a {
-      font-family: var(--mono);
-      font-size: 10.5px;
-      font-weight: 500;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--ink-muted);
-      text-decoration: none;
-      transition: color 0.15s;
-    }
-    .nav-links a:hover { color: var(--ink); }
-
-    .nav-inner {
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 0 48px;
-      height: 64px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-    }
-    @media (max-width: 640px) { .nav-inner { padding: 0 24px; } }
-
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      text-decoration: none;
-      color: var(--ink);
-    }
-    .nav-logo .mk { width: 30px; height: 30px; }
-    .nav-logo .wm-name {
-      font-family: var(--serif);
-      font-weight: 600;
-      font-size: 18px;
-      letter-spacing: -0.01em;
-      line-height: 1;
-    }
-    .nav-logo .wm-desc {
-      font-family: var(--mono);
-      font-size: 8.5px;
-      letter-spacing: 0.38em;
-      text-transform: uppercase;
-      color: var(--ink-muted);
-      margin-top: 4px;
-    }
-
-    .nav-cta {
-      font-family: var(--mono);
-      font-size: 10.5px;
-      font-weight: 500;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--ink);
-      text-decoration: none;
-      border: 1px solid var(--hair-s);
-      padding: 9px 18px;
-      transition: background 0.15s, color 0.15s, border-color 0.15s;
-    }
-    .nav-cta:hover { background: var(--ink); color: var(--bg); border-color: var(--ink); }
-
-    /* ── HERO ── */
-    .hero {
-      position: relative;
-      overflow: hidden;
-      padding: 120px 0 100px;
-      border-bottom: 1px solid var(--hair);
-    }
-
-    .hero-skyline {
-      position: absolute;
-      left: 0; right: 0; bottom: -2px;
-      height: clamp(160px, 30vw, 340px);
-      color: var(--ink);
-      opacity: 0.07;
-      pointer-events: none;
-      -webkit-mask-image: linear-gradient(to top, black 50%, transparent 100%);
-      mask-image: linear-gradient(to top, black 50%, transparent 100%);
-    }
-    .hero-skyline svg { width: 100%; height: 100%; display: block; }
-
-    .hero-inner { position: relative; z-index: 1; }
-    @media (max-width: 640px) { .hero { padding: 80px 0 72px; } }
-
-    .hero-inner {
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 0 48px;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 64px;
-      align-items: end;
-    }
-    @media (max-width: 800px) {
-      .hero-inner { grid-template-columns: 1fr; gap: 48px; }
-      .hero-mark { display: none; }
-    }
-    @media (max-width: 640px) { .hero-inner { padding: 0 24px; } }
-
-    .hero-kicker { margin-bottom: 24px; }
-
-    .hero h1 {
-      font-family: var(--serif);
-      font-weight: 600;
-      font-size: clamp(46px, 7.5vw, 92px);
-      line-height: 0.93;
-      letter-spacing: -0.03em;
-      color: var(--ink);
-    }
-
-    .hero-sub {
-      font-family: var(--serif);
-      font-size: clamp(17px, 1.8vw, 20px);
-      line-height: 1.65;
-      color: var(--ink-soft);
-      max-width: 52ch;
-      margin-top: 28px;
-    }
-
-    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 44px; }
-
-    .btn-primary {
-      font-family: var(--mono);
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.20em;
-      text-transform: uppercase;
-      background: var(--ink);
-      color: var(--bg);
-      border: 1px solid var(--ink);
-      padding: 14px 28px;
-      text-decoration: none;
-      display: inline-block;
-      transition: opacity 0.15s;
-    }
-    .btn-primary:hover { opacity: 0.85; }
-
-    .btn-ghost {
-      font-family: var(--mono);
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.20em;
-      text-transform: uppercase;
-      background: transparent;
-      color: var(--ink);
-      border: 1px solid var(--hair-s);
-      padding: 14px 28px;
-      text-decoration: none;
-      display: inline-block;
-      transition: border-color 0.15s;
-    }
-    .btn-ghost:hover { border-color: rgba(247,245,240,0.45); }
-
-    .hero-mark { width: 180px; height: 180px; color: var(--ink); opacity: 0.12; }
-
-    /* ── STRIP ── */
-    .strip {
-      border-bottom: 1px solid var(--hair);
-      padding: 22px 0;
-    }
-    .strip-inner {
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 0 48px;
-      display: flex;
-      gap: 40px;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-    @media (max-width: 640px) { .strip-inner { padding: 0 24px; gap: 24px; } }
-
-    .strip-item {
-      font-family: var(--mono);
-      font-size: 10.5px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--ink-muted);
-    }
-    .strip-item strong { color: var(--ink); font-weight: 500; }
-
-    /* ── SECTIONS ── */
-    section { padding: 96px 0; border-bottom: 1px solid var(--hair); }
-    @media (max-width: 640px) { section { padding: 64px 0; } }
-
-    .sec-head { margin-bottom: 56px; }
-    .sec-head .kicker { margin-bottom: 16px; }
-    .sec-head h2 {
-      font-family: var(--serif);
-      font-weight: 600;
-      font-size: clamp(34px, 5vw, 58px);
-      line-height: 1.0;
-      letter-spacing: -0.025em;
-      color: var(--ink);
-    }
-    .sec-head p {
-      font-size: 18px;
-      line-height: 1.65;
-      color: var(--ink-soft);
-      max-width: 56ch;
-      margin-top: 18px;
-    }
-
-    /* ── SERVICES ── */
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      border-top: 1px solid var(--hair);
-      border-left: 1px solid var(--hair);
-    }
-    @media (max-width: 860px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 560px) { .services-grid { grid-template-columns: 1fr; } }
-
-    .svc {
-      border-right: 1px solid var(--hair);
-      border-bottom: 1px solid var(--hair);
-      padding: 36px 32px;
-    }
-    .svc-num {
-      font-family: var(--mono);
-      font-size: 10px;
-      letter-spacing: 0.22em;
-      color: var(--ink-muted);
-      margin-bottom: 20px;
-    }
-    .svc h3 {
-      font-family: var(--serif);
-      font-weight: 600;
-      font-size: 19px;
-      line-height: 1.2;
-      margin-bottom: 12px;
-      color: var(--ink);
-    }
-    .svc p {
-      font-size: 15px;
-      line-height: 1.65;
-      color: var(--ink-soft);
-    }
-    .svc-price {
-      font-family: var(--mono);
-      font-size: 10.5px;
-      letter-spacing: 0.14em;
-      color: var(--ink-muted);
-      margin-top: 20px;
-      padding-top: 16px;
-      border-top: 1px solid var(--hair);
-    }
-
-    /* ── HOW ── */
-    .how { background: var(--bg-2); }
-
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      border-top: 1px solid var(--hair);
-    }
-    @media (max-width: 860px) { .steps { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 560px) { .steps { grid-template-columns: 1fr; } }
-
-    .step {
-      padding: 36px 28px;
-      border-right: 1px solid var(--hair);
-      border-bottom: 1px solid var(--hair);
-    }
-    .step:last-child { border-right: none; }
-    @media (max-width: 860px) {
-      .step:nth-child(2n) { border-right: none; }
-    }
-
-    .step-n {
-      font-family: var(--mono);
-      font-size: 10px;
-      letter-spacing: 0.22em;
-      color: var(--ink-muted);
-      margin-bottom: 20px;
-    }
-    .step h3 {
-      font-family: var(--serif);
-      font-weight: 600;
-      font-size: 18px;
-      line-height: 1.2;
-      margin-bottom: 10px;
-      color: var(--ink);
-    }
-    .step p { font-size: 14.5px; line-height: 1.65; color: var(--ink-soft); }
-
-    /* ── CLIENTS ── */
-    .clients-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: var(--hair);
-      border: 1px solid var(--hair);
-    }
-    @media (max-width: 700px) { .clients-grid { grid-template-columns: 1fr 1fr; } }
-    @media (max-width: 480px) { .clients-grid { grid-template-columns: 1fr; } }
-
-    .client-tag {
-      background: var(--bg);
-      padding: 22px 24px;
-      font-family: var(--serif);
-      font-size: 16px;
-      color: var(--ink-soft);
-    }
-
-    /* ── ABOUT ── */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: start;
-    }
-    @media (max-width: 760px) { .about-grid { grid-template-columns: 1fr; gap: 48px; } }
-
-    .about-text p {
-      font-size: 17px;
-      line-height: 1.75;
-      color: var(--ink-soft);
-      margin-bottom: 18px;
-    }
-    .about-text p:last-child { margin-bottom: 0; }
-
-    .credentials { display: flex; flex-direction: column; }
-    .cred {
-      padding: 22px 0;
-      border-bottom: 1px solid var(--hair);
-    }
-    .cred:first-child { border-top: 1px solid var(--hair); }
-    .cred-role {
-      font-family: var(--serif);
-      font-weight: 600;
-      font-size: 16px;
-      margin-bottom: 5px;
-      color: var(--ink);
-    }
-    .cred-org {
-      font-family: var(--mono);
-      font-size: 10.5px;
-      letter-spacing: 0.14em;
-      color: var(--ink-muted);
-      text-transform: uppercase;
-    }
-
-    /* ── CONTACT ── */
-    .contact { background: var(--bg-2); border-bottom: none; }
-
-    .contact-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: start;
-    }
-    @media (max-width: 760px) { .contact-inner { grid-template-columns: 1fr; gap: 48px; } }
-
-    .contact h2 {
-      font-family: var(--serif);
-      font-weight: 600;
-      font-size: clamp(36px, 5vw, 58px);
-      line-height: 1.0;
-      letter-spacing: -0.025em;
-      color: var(--ink);
-      margin-bottom: 22px;
-    }
-    .contact p {
-      font-size: 17px;
-      line-height: 1.7;
-      color: var(--ink-soft);
-      max-width: 48ch;
-    }
-
-    .contact-links { display: flex; flex-direction: column; padding-top: 8px; }
-    .contact-link {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 20px 0;
-      border-bottom: 1px solid var(--hair);
-      text-decoration: none;
-      color: var(--ink);
-      transition: opacity 0.15s;
-    }
-    .contact-link:first-child { border-top: 1px solid var(--hair); }
-    .contact-link:hover { opacity: 0.65; }
-    .contact-link .cl-label {
-      font-family: var(--mono);
-      font-size: 10px;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--ink-muted);
-      margin-bottom: 5px;
-    }
-    .contact-link .cl-val {
-      font-family: var(--serif);
-      font-size: 17px;
-      color: var(--ink);
-    }
-    .contact-link .cl-arr { font-size: 20px; color: var(--ink-muted); }
-
-    /* ── SCROLL REVEAL ── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(22px);
-      transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1);
-      transition-delay: var(--d, 0s);
-    }
-    .reveal.is-visible { opacity: 1; transform: none; }
-    @media (prefers-reduced-motion: reduce) {
-      .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      background: var(--bg);
-      border-top: 1px solid var(--hair);
-      padding: 28px 0;
-    }
-    .footer-inner {
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 0 48px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-    @media (max-width: 640px) { .footer-inner { padding: 0 24px; } }
-
-    .footer-logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      color: var(--ink);
-      text-decoration: none;
-    }
-    .footer-logo .mk { width: 20px; height: 20px; }
-    .footer-logo .wm {
-      font-family: var(--serif);
-      font-weight: 600;
-      font-size: 15px;
-      letter-spacing: -0.01em;
-    }
-    .footer-copy {
-      font-family: var(--mono);
-      font-size: 10px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--ink-muted);
-    }
-  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Libra Research",
+    "description": "Independent OSINT due diligence and business intelligence. Analyst-grade, source-cited reports on companies and individuals.",
+    "url": "https://libraresearch.github.io/",
+    "email": "gobeladriannyrud@gmail.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Oslo",
+      "addressCountry": "NO"
+    },
+    "areaServed": "Nordics and international",
+    "sameAs": ["https://www.linkedin.com/company/certa-research/"]
+  }
+  </script>
 </head>
 <body>
 
-<!-- ── NAV ── -->
-<nav>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- Brand marks — Signal (primary) and Scales (secondary), per identity system v1.0.
+     Static geometry: 4×4 field, solid dot at row 2 / col 3. All currentColor. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="m-signal" viewBox="0 0 100 100">
+      <g fill="none" stroke="currentColor" stroke-width="1.16">
+        <circle cx="16" cy="16" r="6.8"/><circle cx="38.67" cy="16" r="6.8"/><circle cx="61.33" cy="16" r="6.8"/><circle cx="84" cy="16" r="6.8"/>
+        <circle cx="16" cy="38.67" r="6.8"/><circle cx="38.67" cy="38.67" r="6.8"/><circle cx="84" cy="38.67" r="6.8"/>
+        <circle cx="16" cy="61.33" r="6.8"/><circle cx="38.67" cy="61.33" r="6.8"/><circle cx="61.33" cy="61.33" r="6.8"/><circle cx="84" cy="61.33" r="6.8"/>
+        <circle cx="16" cy="84" r="6.8"/><circle cx="38.67" cy="84" r="6.8"/><circle cx="61.33" cy="84" r="6.8"/><circle cx="84" cy="84" r="6.8"/>
+      </g>
+      <circle cx="61.33" cy="38.67" r="6.8" fill="currentColor"/>
+    </symbol>
+    <symbol id="m-scales" viewBox="0 0 100 100">
+      <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <path d="M50 30 V88 M41 88 H59"/>
+        <path d="M19.47 24.62 L80.53 35.38"/>
+        <path d="M19.47 24.62 V39.12 M80.53 35.38 V49.88"/>
+        <circle cx="19.47" cy="46.62" r="7.5"/>
+      </g>
+      <circle cx="80.53" cy="57.38" r="7.5" fill="currentColor"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ── Navigation ── -->
+<nav class="nav" aria-label="Main">
   <div class="nav-inner">
-    <a class="nav-logo" href="#">
-      <div class="mk" data-signal='{"n":4}'></div>
-      <div>
-        <div class="wm-name">Libra</div>
-        <div class="wm-desc">Research</div>
-      </div>
+    <a class="nav-logo" href="#top" aria-label="Libra Research — home">
+      <svg class="mk" aria-hidden="true"><use href="#m-signal"/></svg>
+      <span class="words">
+        <span class="nm">Libra</span>
+        <span class="ds">Research</span>
+      </span>
     </a>
-    <div class="nav-links">
-      <a href="#services">Services</a>
-      <a href="#methodology">Methodology</a>
-      <a href="#about">About</a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Menu">
+      <svg class="icon-open" width="18" height="14" viewBox="0 0 18 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M0 1h18M0 7h18M0 13h18"/></svg>
+      <svg class="icon-close" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 1l12 12M13 1L1 13"/></svg>
+    </button>
+    <div class="nav-menu" id="nav-menu">
+      <div class="nav-links">
+        <a href="#services">Services</a>
+        <a href="#methodology">Methodology</a>
+        <a href="#clients">Clients</a>
+        <a href="#about">About</a>
+      </div>
+      <a class="nav-cta" href="#contact">Get in touch</a>
     </div>
-    <a class="nav-cta" href="#contact">Get in touch</a>
   </div>
 </nav>
 
-<!-- ── HERO ── -->
-<div class="hero">
-  <div class="hero-skyline" aria-hidden="true">
-    <svg viewBox="0 0 1440 340" preserveAspectRatio="xMidYMax slice" fill="none" stroke="currentColor" stroke-width="1.3">
-      <!-- ground line -->
-      <path d="M0 339 H1440" />
-      <!-- left low blocks -->
-      <path d="M0 339 V268 H42 V252 H88 V339" />
-      <!-- City Hall twin towers -->
-      <path d="M108 339 V128 H160 V339 M114 128 V112 H154 V128 M118 150 H150 M118 170 H150 M118 190 H150" />
-      <path d="M160 224 H196 V339" />
-      <path d="M196 339 V140 H248 V339 M202 140 V124 H242 V140 M206 162 H238 M206 182 H238 M206 202 H238" />
-      <!-- low band -->
-      <path d="M268 339 V262 H318 V278 H352 V339" />
-      <!-- Oslo Plaza (curved top + antenna) -->
-      <path d="M376 339 V96 Q376 62 402 62 Q428 62 428 96 V339 M402 62 V34 M384 110 H420 M384 140 H420" />
-      <!-- mid low blocks -->
-      <path d="M448 339 V270 H496 V254 H540 V282 H576 V339" />
-      <!-- Barcode district -->
-      <path d="M600 339 V158 H636 V339 M606 174 H630" />
-      <path d="M648 339 V116 H678 V339" />
-      <path d="M690 339 V188 H732 V339 M696 204 H726" />
-      <path d="M744 339 V98 H776 V339 M750 114 H770" />
-      <path d="M788 339 V166 H826 V339" />
-      <path d="M838 339 V134 H872 V339 M844 150 H866" />
-      <path d="M884 339 V206 H928 V339" />
-      <path d="M940 339 V148 H972 V339 M946 164 H966" />
-      <!-- low gap -->
-      <path d="M992 339 V288 H1044 V339" />
-      <!-- Opera house (slanted planes) -->
-      <path d="M1064 339 L1252 206 L1290 296 L1316 339" />
-      <path d="M1096 339 L1244 234" />
-      <path d="M1180 339 L1262 282" />
-      <!-- right edge blocks -->
-      <path d="M1336 339 V240 H1382 V262 H1440 V339" />
-    </svg>
-  </div>
-  <div class="hero-inner">
-    <div>
-      <div class="kicker hero-kicker">Due diligence · Nordics &amp; beyond</div>
-      <h1>Know who<br>you're dealing<br>with.</h1>
-      <p class="hero-sub">Libra Research delivers analyst-grade OSINT due diligence reports on companies and individuals — so you can act with confidence.</p>
-      <div class="hero-actions">
-        <a class="btn-primary" href="#contact">Commission a report</a>
-        <a class="btn-ghost" href="#services">Our services</a>
-      </div>
-    </div>
-    <div class="hero-mark" data-signal='{"n":4}'></div>
-  </div>
-</div>
-
-<!-- ── STRIP ── -->
-<div class="strip">
-  <div class="strip-inner">
-    <div class="strip-item"><strong>24–48 h</strong> turnaround</div>
-    <div class="strip-item"><strong>100%</strong> open-source methodology</div>
-    <div class="strip-item"><strong>Fully</strong> auditable</div>
-    <div class="strip-item">Based in <strong>Oslo, Norway</strong></div>
-  </div>
-</div>
-
-<!-- ── SERVICES ── -->
-<section id="services">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="kicker">Services</div>
-      <h2>What we deliver.</h2>
-      <p>Structured, source-cited reports built on open-source intelligence. Every finding documented, every source traceable.</p>
-    </div>
-    <div class="services-grid">
-      <div class="svc">
-        <div class="svc-num">01</div>
-        <h3>Corporate Due Diligence</h3>
-        <p>Ownership structure, key personnel, litigation history, adverse media, and reputational risk — consolidated in one report.</p>
-        <div class="svc-price">From NOK 4,000</div>
-      </div>
-      <div class="svc">
-        <div class="svc-num">02</div>
-        <h3>Enhanced Due Diligence</h3>
-        <p>Deep-dive investigation for higher-risk counterparties. Source-of-wealth, PEP exposure, sanctions screening, and layered ownership analysis.</p>
-        <div class="svc-price">From NOK 10,000</div>
-      </div>
-      <div class="svc">
-        <div class="svc-num">03</div>
-        <h3>Adverse Media &amp; Sanctions Screening</h3>
-        <p>Systematic sweep across global media, regulatory databases, and sanctions lists. Delivered as a concise risk summary.</p>
-        <div class="svc-price">From NOK 2,000</div>
-      </div>
-      <div class="svc">
-        <div class="svc-num">04</div>
-        <h3>Beneficial Ownership Mapping</h3>
-        <p>UBO tracing through corporate layers, nominees, and jurisdictions. Available standalone or included in CDD/EDD reports.</p>
-        <div class="svc-price">Included in CDD · standalone on request</div>
-      </div>
-      <div class="svc">
-        <div class="svc-num">05</div>
-        <h3>Monitoring Retainer</h3>
-        <p>Ongoing surveillance of a subject — new adverse media, ownership changes, regulatory actions — reported on a monthly cadence.</p>
-        <div class="svc-price">From NOK 3,000 / month</div>
-      </div>
-      <div class="svc">
-        <div class="svc-num">06</div>
-        <h3>Bespoke Research</h3>
-        <p>Custom intelligence briefs for specific mandates — pre-litigation profiling, competitive intelligence, or M&amp;A target screening.</p>
-        <div class="svc-price">Quoted on request</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── HOW ── -->
-<section class="how" id="methodology">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="kicker">Methodology</div>
-      <h2>How we work.</h2>
-      <p>Every report follows a structured process — no assumptions, no unverified claims. Sources cited throughout.</p>
-    </div>
-    <div class="steps">
-      <div class="step">
-        <div class="step-n">01</div>
-        <h3>Brief</h3>
-        <p>You tell us who or what to investigate and what decisions are riding on the findings.</p>
-      </div>
-      <div class="step">
-        <div class="step-n">02</div>
-        <h3>Collection</h3>
-        <p>We systematically gather data across corporate registries, court records, media, regulatory filings, and open databases.</p>
-      </div>
-      <div class="step">
-        <div class="step-n">03</div>
-        <h3>Analysis</h3>
-        <p>Raw findings are verified, cross-referenced, and assessed for materiality. Every red flag is evaluated in context.</p>
-      </div>
-      <div class="step">
-        <div class="step-n">04</div>
-        <h3>Report</h3>
-        <p>A structured, cited report lands in your inbox within 24–48 hours. Ready to act on.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── CLIENTS ── -->
-<section id="clients">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="kicker">Who we work with</div>
-      <h2>Built for professionals<br>who need certainty.</h2>
-    </div>
-    <div class="clients-grid">
-      <div class="client-tag">M&amp;A advisors</div>
-      <div class="client-tag">Private equity firms</div>
-      <div class="client-tag">Law firms</div>
-      <div class="client-tag">Compliance teams</div>
-      <div class="client-tag">Fintech lenders</div>
-      <div class="client-tag">Corporate development</div>
-    </div>
-  </div>
-</section>
-
-<!-- ── ABOUT ── -->
-<section id="about">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="kicker">About</div>
-      <h2>Serious research.<br>No fluff.</h2>
-    </div>
-    <div class="about-text" style="max-width: 64ch;">
-      <p>Libra Research is an independent due diligence practice based in Oslo. We produce structured, analyst-grade reports on companies and individuals using open-source intelligence — fully auditable, no proprietary black boxes.</p>
-      <p>Our methodology is built on the same principles used in regulated financial crime investigations: systematic collection, rigorous verification, and clear documentation of every source. What you receive is a report you can stand behind.</p>
-      <p>We work with clients across the Nordics and internationally, on mandates ranging from pre-acquisition screening to ongoing counterparty monitoring.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ── CONTACT ── -->
-<section class="contact" id="contact">
-  <div class="wrap">
-    <div class="contact-inner">
+<!-- ── Masthead ── -->
+<header class="mast" id="top">
+  <div class="mast-inner">
+    <div class="mast-hero">
       <div>
-        <h2>Start a conversation.</h2>
-        <p>Tell us what you need to know. We'll confirm scope and turnaround within one business day.</p>
+        <span class="kicker">OSINT Due Diligence · Nordics &amp; Beyond</span>
+        <h1>Know who<br>you&rsquo;re dealing<br>with.</h1>
+        <p class="mast-sub">Libra Research delivers analyst-grade due diligence on companies and individuals — every finding documented, every source traceable — so you can act with confidence.</p>
+        <div class="mast-actions">
+          <a class="btn btn-solid" href="#contact">Commission a report</a>
+          <a class="btn btn-ghost" href="#services">Our services</a>
+        </div>
+      </div>
+      <div class="mast-mark" aria-hidden="true">
+        <svg class="mk"><use href="#m-signal"/></svg>
+      </div>
+    </div>
+    <div class="mast-foot">
+      <div>
+        <span class="kicker">Turnaround</span>
+        <div class="val">24–48 hours</div>
+      </div>
+      <div>
+        <span class="kicker">Methodology</span>
+        <div class="val">100% open source</div>
+      </div>
+      <div>
+        <span class="kicker">Output</span>
+        <div class="val">Fully auditable</div>
+      </div>
+      <div>
+        <span class="kicker">Base</span>
+        <div class="val">Oslo, Norway</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ── Services ── -->
+  <section id="services" aria-labelledby="services-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="num">01 / SERVICES</span>
+        <div>
+          <span class="kicker">What we deliver</span>
+          <h2 id="services-h">Structured reports.<br>Traceable sources.</h2>
+          <p class="lede">Source-cited intelligence built entirely on open sources. Every finding documented, every claim verifiable — no proprietary black boxes.</p>
+        </div>
+      </div>
+      <div class="services-grid">
+        <article class="svc">
+          <div class="svc-num">01</div>
+          <h3>Corporate Due Diligence</h3>
+          <p>Ownership structure, key personnel, litigation history, adverse media, and reputational risk — consolidated in one report.</p>
+          <div class="svc-price">From NOK 4,000</div>
+        </article>
+        <article class="svc">
+          <div class="svc-num">02</div>
+          <h3>Enhanced Due Diligence</h3>
+          <p>Deep-dive investigation for higher-risk counterparties. Source-of-wealth, PEP exposure, sanctions screening, and layered ownership analysis.</p>
+          <div class="svc-price">From NOK 10,000</div>
+        </article>
+        <article class="svc">
+          <div class="svc-num">03</div>
+          <h3>Adverse Media &amp; Sanctions Screening</h3>
+          <p>Systematic sweep across global media, regulatory databases, and sanctions lists. Delivered as a concise risk summary.</p>
+          <div class="svc-price">From NOK 2,000</div>
+        </article>
+        <article class="svc">
+          <div class="svc-num">04</div>
+          <h3>Beneficial Ownership Mapping</h3>
+          <p>UBO tracing through corporate layers, nominees, and jurisdictions. Available standalone or included in CDD/EDD reports.</p>
+          <div class="svc-price">Included in CDD · standalone on request</div>
+        </article>
+        <article class="svc">
+          <div class="svc-num">05</div>
+          <h3>Monitoring Retainer</h3>
+          <p>Ongoing surveillance of a subject — new adverse media, ownership changes, regulatory actions — reported on a monthly cadence.</p>
+          <div class="svc-price">From NOK 3,000 / month</div>
+        </article>
+        <article class="svc">
+          <div class="svc-num">06</div>
+          <h3>Bespoke Research</h3>
+          <p>Custom intelligence briefs for specific mandates — pre-litigation profiling, competitive intelligence, or M&amp;A target screening.</p>
+          <div class="svc-price">Quoted on request</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Methodology ── -->
+  <section class="how" id="methodology" aria-labelledby="methodology-h">
+    <div class="wrap">
+      <div class="how-head">
+        <div class="sec-head">
+          <span class="num">02 / METHOD</span>
+          <div>
+            <span class="kicker">How we work</span>
+            <h2 id="methodology-h">Weighing evidence.</h2>
+            <p class="lede">Every report follows the same structured process — no assumptions, no unverified claims. The unknown is set against the verified, and we report where the balance falls.</p>
+          </div>
+        </div>
+        <div class="how-mark" aria-hidden="true">
+          <svg class="mk"><use href="#m-scales"/></svg>
+        </div>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-n">01</div>
+          <h3>Brief</h3>
+          <p>You tell us who or what to investigate, and what decisions are riding on the findings.</p>
+        </div>
+        <div class="step">
+          <div class="step-n">02</div>
+          <h3>Collection</h3>
+          <p>We systematically gather data across corporate registries, court records, media, regulatory filings, and open databases.</p>
+        </div>
+        <div class="step">
+          <div class="step-n">03</div>
+          <h3>Analysis</h3>
+          <p>Raw findings are verified, cross-referenced, and assessed for materiality. Every red flag is evaluated in context.</p>
+        </div>
+        <div class="step">
+          <div class="step-n">04</div>
+          <h3>Report</h3>
+          <p>A structured, cited report lands in your inbox within 24–48 hours. Ready to act on.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Clients ── -->
+  <section id="clients" aria-labelledby="clients-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="num">03 / CLIENTS</span>
+        <div>
+          <span class="kicker">Who we work with</span>
+          <h2 id="clients-h">Built for professionals<br>who need certainty.</h2>
+        </div>
+      </div>
+      <div class="clients-grid">
+        <div class="client">M&amp;A advisors</div>
+        <div class="client">Private equity firms</div>
+        <div class="client">Law firms</div>
+        <div class="client">Compliance teams</div>
+        <div class="client">Fintech lenders</div>
+        <div class="client">Corporate development</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── About ── -->
+  <section id="about" aria-labelledby="about-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="num">04 / ABOUT</span>
+        <div>
+          <span class="kicker">The practice</span>
+          <h2 id="about-h">Serious research.<br>No fluff.</h2>
+        </div>
+      </div>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>Libra Research is an independent due diligence practice based in Oslo. We produce structured, analyst-grade reports on companies and individuals using open-source intelligence — fully auditable, no proprietary black boxes.</p>
+          <p>Our methodology is built on the same principles used in regulated financial crime investigations: systematic collection, rigorous verification, and clear documentation of every source. What you receive is a report you can stand behind.</p>
+          <p>We work with clients across the Nordics and internationally, on mandates ranging from pre-acquisition screening to ongoing counterparty monitoring.</p>
+        </div>
+        <ul class="principles">
+          <li class="principle">
+            <div class="p-name">Independent</div>
+            <div class="p-desc">No conflicts · No commissions</div>
+          </li>
+          <li class="principle">
+            <div class="p-name">Auditable</div>
+            <div class="p-desc">Every source cited</div>
+          </li>
+          <li class="principle">
+            <div class="p-name">Discreet</div>
+            <div class="p-desc">Confidential by default</div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Contact ── -->
+  <section class="contact" id="contact" aria-labelledby="contact-h">
+    <div class="contact-wm" aria-hidden="true">
+      <svg class="mk"><use href="#m-signal"/></svg>
+    </div>
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="num">05 / CONTACT</span>
+        <div>
+          <span class="kicker">Get in touch</span>
+          <h2 id="contact-h">Start a conversation.</h2>
+          <p class="lede">Tell us what you need to know. We'll confirm scope, pricing, and turnaround within one business day.</p>
+        </div>
       </div>
       <div class="contact-links">
         <a class="contact-link" href="mailto:gobeladriannyrud@gmail.com">
-          <div>
-            <div class="cl-label">Email</div>
-            <div class="cl-val">gobeladriannyrud@gmail.com</div>
-          </div>
-          <span class="cl-arr">→</span>
+          <span>
+            <span class="cl-label">Email</span><br>
+            <span class="cl-val">gobeladriannyrud@gmail.com</span>
+          </span>
+          <span class="cl-arr" aria-hidden="true">&rarr;</span>
         </a>
         <a class="contact-link" href="https://www.linkedin.com/company/certa-research/" target="_blank" rel="noopener">
-          <div>
-            <div class="cl-label">LinkedIn</div>
-            <div class="cl-val">Libra Research</div>
-          </div>
-          <span class="cl-arr">→</span>
+          <span>
+            <span class="cl-label">LinkedIn</span><br>
+            <span class="cl-val">Libra Research</span>
+          </span>
+          <span class="cl-arr" aria-hidden="true">&rarr;</span>
         </a>
-        <a class="contact-link" href="#">
-          <div>
-            <div class="cl-label">Location</div>
-            <div class="cl-val">Oslo, Norway</div>
-          </div>
-        </a>
+        <div class="contact-link">
+          <span>
+            <span class="cl-label">Location</span><br>
+            <span class="cl-val">Oslo, Norway</span>
+          </span>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ── FOOTER ── -->
+</main>
+
+<!-- ── Footer ── -->
 <footer>
   <div class="footer-inner">
-    <a class="footer-logo" href="#">
-      <div class="mk" data-signal='{"n":4}'></div>
+    <a class="footer-logo" href="#top">
+      <svg class="mk" aria-hidden="true"><use href="#m-signal"/></svg>
       <span class="wm">Libra Research</span>
     </a>
-    <span class="footer-copy">Oslo · Norway · 2026</span>
+    <span class="footer-copy">Oslo · Norway · <span id="year">2026</span></span>
   </div>
 </footer>
 
-<script>
-/* Libra Research — Signal mark renderer */
-(function () {
-  var NS = 'http://www.w3.org/2000/svg';
-  function el(name, attrs) {
-    var e = document.createElementNS(NS, name);
-    for (var k in attrs) e.setAttribute(k, attrs[k]);
-    return e;
-  }
-  function signalSVG(o) {
-    o = o || {};
-    var n        = o.n        != null ? o.n        : 4;
-    var fillRow  = o.fillRow  != null ? o.fillRow  : 2;
-    var fillCol  = o.fillCol  != null ? o.fillCol  : 3;
-    var padding  = o.padding  != null ? o.padding  : 16;
-    var dotScale = o.dotScale != null ? o.dotScale : 0.30;
-    var fillScale= o.fillScale!= null ? o.fillScale: 1.0;
-    var svg = el('svg', { viewBox: '0 0 100 100', fill: 'none', 'aria-hidden': 'true' });
-    svg.style.cssText = 'width:100%;height:100%;display:block;';
-    var span  = 100 - padding * 2;
-    var pitch = n > 1 ? span / (n - 1) : 0;
-    var r     = pitch * dotScale;
-    var sw    = Math.max(1.05, r * 0.17);
-    for (var row = 1; row <= n; row++) {
-      for (var col = 1; col <= n; col++) {
-        var cx = padding + (col - 1) * pitch;
-        var cy = padding + (row - 1) * pitch;
-        var isFill = row === fillRow && col === fillCol;
-        if (isFill) {
-          svg.appendChild(el('circle', { cx: cx, cy: cy, r: r * fillScale, fill: 'currentColor' }));
-        } else {
-          svg.appendChild(el('circle', { cx: cx, cy: cy, r: r, stroke: 'currentColor', 'stroke-width': sw, fill: 'none' }));
-        }
-      }
-    }
-    return svg;
-  }
-  function renderAll() {
-    document.querySelectorAll('[data-signal]').forEach(function (t) {
-      var o = t.getAttribute('data-signal');
-      t.innerHTML = '';
-      t.appendChild(signalSVG(o ? JSON.parse(o) : {}));
-    });
-  }
-  function setupReveal() {
-    var singles = document.querySelectorAll('.sec-head, .about-text, .contact-inner');
-    singles.forEach(function (e) { e.classList.add('reveal'); });
-    document.querySelectorAll('.services-grid, .steps, .clients-grid').forEach(function (grid) {
-      Array.prototype.forEach.call(grid.children, function (child, i) {
-        child.classList.add('reveal');
-        child.style.setProperty('--d', (i * 0.07) + 's');
-      });
-    });
-    var targets = document.querySelectorAll('.reveal');
-    if (!('IntersectionObserver' in window)) {
-      targets.forEach(function (e) { e.classList.add('is-visible'); });
-      return;
-    }
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          io.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
-    targets.forEach(function (e) { io.observe(e); });
-  }
-  function init() { renderAll(); setupReveal(); }
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
-})();
-</script>
-
+<script src="js/main.js" defer></script>
 </body>
 </html>
