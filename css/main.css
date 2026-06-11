@@ -578,29 +578,6 @@ section {
   border-bottom: 1px solid var(--hair);
 }
 
-.how .sec-head {
-  margin-bottom: 0;
-}
-
-.how-head {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 48px;
-  align-items: center;
-  margin-bottom: 60px;
-}
-
-.how-mark {
-  width: 110px;
-  aspect-ratio: 1;
-  color: var(--ink);
-}
-
-@media (max-width: 720px) {
-  .how-mark {
-    display: none;
-  }
-}
 
 .steps {
   display: grid;
