@@ -29,7 +29,7 @@
     "name": "Libra Research",
     "description": "Independent OSINT due diligence and business intelligence. Analyst-grade, source-cited reports on companies and individuals.",
     "url": "https://libraresearch.github.io/",
-    "email": "gobeladriannyrud@gmail.com",
+    "email": "adrian@libraresearch.no",
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "Oslo",
@@ -90,7 +90,7 @@
 <header class="mast" id="top">
   <div class="mast-inner">
     <div class="mast-hero">
-      <div>
+      <div class="mast-lead">
         <span class="kicker">OSINT Due Diligence · Nordics &amp; Beyond</span>
         <h1>Know who<br>you&rsquo;re dealing<br>with.</h1>
         <p class="mast-sub">Libra Research delivers analyst-grade due diligence on companies and individuals — every finding documented, every source traceable — so you can act with confidence.</p>
@@ -99,26 +99,23 @@
           <a class="btn btn-ghost" href="#services">Our services</a>
         </div>
       </div>
-      <div class="mast-mark" aria-hidden="true">
-        <svg class="mk"><use href="#m-signal"/></svg>
-      </div>
-    </div>
-    <div class="mast-foot">
-      <div>
-        <span class="kicker">Turnaround</span>
-        <div class="val">24–48 hours</div>
-      </div>
-      <div>
-        <span class="kicker">Methodology</span>
-        <div class="val">100% open source</div>
-      </div>
-      <div>
-        <span class="kicker">Output</span>
-        <div class="val">Fully auditable</div>
-      </div>
-      <div>
-        <span class="kicker">Base</span>
-        <div class="val">Oslo, Norway</div>
+      <div class="mast-stats">
+        <div class="stat">
+          <span class="kicker">Turnaround</span>
+          <div class="val">24–48 hours</div>
+        </div>
+        <div class="stat">
+          <span class="kicker">Methodology</span>
+          <div class="val">100% open source</div>
+        </div>
+        <div class="stat">
+          <span class="kicker">Output</span>
+          <div class="val">Fully auditable</div>
+        </div>
+        <div class="stat">
+          <span class="kicker">Base</span>
+          <div class="val">Oslo, Norway</div>
+        </div>
       </div>
     </div>
   </div>
@@ -141,38 +138,50 @@
       <div class="services-grid">
         <article class="svc">
           <div class="svc-num">01</div>
-          <h3>Corporate Due Diligence</h3>
-          <p>Ownership structure, key personnel, litigation history, adverse media, and reputational risk — consolidated in one report.</p>
+          <div class="svc-main">
+            <h3>Corporate Due Diligence</h3>
+            <p class="svc-desc">Ownership structure, key personnel, litigation history, adverse media, and reputational risk — consolidated in one report.</p>
+          </div>
           <div class="svc-price">From NOK 4,000</div>
         </article>
         <article class="svc">
           <div class="svc-num">02</div>
-          <h3>Enhanced Due Diligence</h3>
-          <p>Deep-dive investigation for higher-risk counterparties. Source-of-wealth, PEP exposure, sanctions screening, and layered ownership analysis.</p>
+          <div class="svc-main">
+            <h3>Enhanced Due Diligence</h3>
+            <p class="svc-desc">Deep-dive investigation for higher-risk counterparties. Source-of-wealth, PEP exposure, sanctions screening, and layered ownership analysis.</p>
+          </div>
           <div class="svc-price">From NOK 10,000</div>
         </article>
         <article class="svc">
           <div class="svc-num">03</div>
-          <h3>Adverse Media &amp; Sanctions Screening</h3>
-          <p>Systematic sweep across global media, regulatory databases, and sanctions lists. Delivered as a concise risk summary.</p>
+          <div class="svc-main">
+            <h3>Adverse Media &amp; Sanctions Screening</h3>
+            <p class="svc-desc">Systematic sweep across global media, regulatory databases, and sanctions lists. Delivered as a concise risk summary.</p>
+          </div>
           <div class="svc-price">From NOK 2,000</div>
         </article>
         <article class="svc">
           <div class="svc-num">04</div>
-          <h3>Beneficial Ownership Mapping</h3>
-          <p>UBO tracing through corporate layers, nominees, and jurisdictions. Available standalone or included in CDD/EDD reports.</p>
+          <div class="svc-main">
+            <h3>Beneficial Ownership Mapping</h3>
+            <p class="svc-desc">UBO tracing through corporate layers, nominees, and jurisdictions. Available standalone or included in CDD/EDD reports.</p>
+          </div>
           <div class="svc-price">Included in CDD · standalone on request</div>
         </article>
         <article class="svc">
           <div class="svc-num">05</div>
-          <h3>Monitoring Retainer</h3>
-          <p>Ongoing surveillance of a subject — new adverse media, ownership changes, regulatory actions — reported on a monthly cadence.</p>
+          <div class="svc-main">
+            <h3>Monitoring Retainer</h3>
+            <p class="svc-desc">Ongoing surveillance of a subject — new adverse media, ownership changes, regulatory actions — reported on a monthly cadence.</p>
+          </div>
           <div class="svc-price">From NOK 3,000 / month</div>
         </article>
         <article class="svc">
           <div class="svc-num">06</div>
-          <h3>Bespoke Research</h3>
-          <p>Custom intelligence briefs for specific mandates — pre-litigation profiling, competitive intelligence, or M&amp;A target screening.</p>
+          <div class="svc-main">
+            <h3>Bespoke Research</h3>
+            <p class="svc-desc">Custom intelligence briefs for specific mandates — pre-litigation profiling, competitive intelligence, or M&amp;A target screening.</p>
+          </div>
           <div class="svc-price">Quoted on request</div>
         </article>
       </div>
@@ -226,13 +235,15 @@
         </div>
         <h2 id="clients-h">Built for professionals<br>who need certainty.</h2>
       </div>
-      <div class="clients-grid">
-        <div class="client">M&amp;A advisors</div>
-        <div class="client">Private equity firms</div>
-        <div class="client">Law firms</div>
-        <div class="client">Compliance teams</div>
-        <div class="client">Fintech lenders</div>
-        <div class="client">Corporate development</div>
+      <div class="clients-band">
+        <div class="clients-grid">
+          <span class="client">M&amp;A advisors</span>
+          <span class="client">Private equity firms</span>
+          <span class="client">Law firms</span>
+          <span class="client">Compliance teams</span>
+          <span class="client">Fintech lenders</span>
+          <span class="client">Corporate development</span>
+        </div>
       </div>
     </div>
   </section>
@@ -288,10 +299,10 @@
         <p class="lede">Tell us what you need to know. We'll confirm scope, pricing, and turnaround within one business day.</p>
       </div>
       <div class="contact-links">
-        <a class="contact-link" href="mailto:gobeladriannyrud@gmail.com">
+        <a class="contact-link" href="mailto:adrian@libraresearch.no">
           <span>
             <span class="cl-label">Email</span><br>
-            <span class="cl-val">gobeladriannyrud@gmail.com</span>
+            <span class="cl-val">adrian@libraresearch.no</span>
           </span>
           <span class="cl-arr" aria-hidden="true">&rarr;</span>
         </a>
