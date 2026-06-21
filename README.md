@@ -5,18 +5,18 @@ Static site for [libraresearch.github.io](https://libraresearch.github.io), buil
 ## Structure
 
 ```
-index.html        Single-page site (services, methodology, clients, about, contact)
-404.html          Not-found page (served automatically by GitHub Pages)
-css/main.css      All styles
-js/main.js        Progressive enhancement only (mobile nav, scroll reveal)
+index.html          Single-file site — all CSS and JS inline (services, methodology,
+                    sample work, clients, about, contact)
+404.html            Not-found page (served automatically by GitHub Pages)
+sample-report.pdf   Anonymized sample due-diligence report (linked from Sample work)
 assets/favicon.svg  Signal mark favicon (adapts to light/dark mode)
 ```
 
 ## Identity rules baked in
 
-- **Colour** — ink `#1B1A17` on paper `#F7F5F0` and the exact reverse. No accents, no tints.
-- **Type** — Spectral (serif) for headings and body; IBM Plex Mono for kickers, labels, prices.
-- **Marks** — Signal (4×4 dot field, solid dot at row 2 / col 3) is the primary mark, defined once as an inline SVG `<symbol>` and reused via `<use>`. Scales is the secondary mark, used in the Methodology section. Both render without JavaScript.
+- **Colour** — ink `#16140F` on archival paper `#F3EFE6`, with a single restrained oxblood accent (`oklch(0.47 0.13 27)`) reserved for section markers and status/risk indicators.
+- **Type** — Spectral (serif) for display and body; IBM Plex Mono for labels, metadata, and classification text.
+- **Marks** — Signal (4×4 dot field, solid dot at row 2 / col 3) is the primary mark, defined once as an inline SVG `<symbol>` and reused via `<use>`. It renders without JavaScript.
 
 ## Local preview
 

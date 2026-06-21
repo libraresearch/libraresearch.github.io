@@ -1,6 +1,7 @@
 # Local working dirs not part of the published site
 .claude/
 libra-osint/
+libra-iban/
 
 # macOS
 .DS_Store
