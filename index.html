@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Libra Research — OSINT Due Diligence &amp; Business Intelligence, Oslo</title>
-  <meta name="description" content="Independent OSINT due diligence on companies and individuals. Analyst-grade, source-cited dossiers for M&A advisors, private equity, law firms, and compliance teams — Nordic-native, delivered in 24–48 hours from Oslo, Norway.">
+  <title>Libra Research — OSINT Due Diligence, Oslo</title>
+  <meta name="description" content="Libra Research — independent, source-cited OSINT due diligence on companies and individuals. Nordic-native, discreet, fully auditable. Oslo, Norway. Request a quote.">
   <link rel="canonical" href="https://libraresearch.no/">
-  <meta name="theme-color" content="#16140f">
+  <meta name="theme-color" content="#14120d">
 
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://libraresearch.no/">
   <meta property="og:title" content="Libra Research — OSINT Due Diligence">
-  <meta property="og:description" content="Analyst-grade, source-cited due diligence dossiers on companies and individuals. Nordic-native. 24–48 hour turnaround. Oslo, Norway.">
+  <meta property="og:description" content="Independent, source-cited due diligence on companies and individuals. Nordic-native. Oslo, Norway.">
   <meta name="twitter:card" content="summary">
 
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
@@ -40,510 +40,132 @@
 
   <style>
   /* ==========================================================================
-     Libra Research — single-file dossier build.
-     Identity: ink #16140f on archival paper #f3efe6, one accent (oxblood).
-     Type: Spectral (serif display) / IBM Plex Mono (metadata & labels).
-     The page is composed to read like a confidential case file.
+     Libra Research — single-screen cover.
+     A slow flowing gradient (WebGL) in our oxblood/ember warmth on deep ink,
+     behind a minimal statement. Static gradient fallback for reduced-motion.
      ========================================================================== */
 
   :root {
-    --ink:          #16140f;
-    --paper:        #f3efe6;
-    --cell:         #ece6d8;   /* banded sections */
-    --raise:        #f8f5ee;   /* raised cards */
-    --hair:         rgba(22, 20, 15, 0.16);
-    --hair-strong:  rgba(22, 20, 15, 0.34);
-    --muted:        rgba(22, 20, 15, 0.54);
-    --body:         rgba(22, 20, 15, 0.80);
-    --hair-rev:     rgba(243, 239, 230, 0.20);
-    --muted-rev:    rgba(243, 239, 230, 0.62);
-    --body-rev:     rgba(243, 239, 230, 0.80);
-
-    --accent:       oklch(0.47 0.13 27);   /* oxblood — used sparingly */
-
-    /* muted status tones for the risk extract */
-    --st-green:     oklch(0.52 0.07 150);
-    --st-amber:     oklch(0.62 0.10 78);
-    --st-red:       oklch(0.50 0.13 27);
+    --ink:      #14120d;
+    --paper:    #f3efe6;
+    --muted:    rgba(243, 239, 230, 0.56);
+    --hair:     rgba(243, 239, 230, 0.16);
+    --accent:   oklch(0.7 0.14 38);   /* warm ember/oxblood — for the small kicker only */
 
     --serif: "Spectral", Georgia, "Times New Roman", serif;
     --mono:  "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
-
-    --col: 1140px;
     --gutter: 56px;
   }
 
   *, *::before, *::after { box-sizing: border-box; }
-
-  html {
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-    scroll-behavior: smooth;
-    scroll-padding-top: 92px;
-  }
-  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
 
   body {
     margin: 0;
-    background: var(--paper);
-    color: var(--ink);
+    background: var(--ink);
+    color: var(--paper);
     font-family: var(--serif);
     font-size: 17px;
     line-height: 1.6;
     font-feature-settings: "liga" 1, "kern" 1;
+    -webkit-tap-highlight-color: transparent;
   }
-
-  h1, h2, h3, p, ul, figure, table { margin: 0; }
   a { color: inherit; }
+  h1, p { margin: 0; }
 
-  .wrap {
-    max-width: var(--col);
-    margin: 0 auto;
-    padding: 0 var(--gutter);
-  }
-
-  @media (max-width: 720px) { :root { --gutter: 22px; } }
-
-  /* ---- type primitives ---- */
+  @media (max-width: 720px) { :root { --gutter: 24px; } }
 
   .mono { font-family: var(--mono); }
 
-  .kicker {
-    font-family: var(--mono);
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.34em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-
-  .vh {  /* visually hidden */
-    position: absolute !important;
-    width: 1px; height: 1px;
-    padding: 0; margin: -1px;
-    overflow: hidden; clip: rect(0 0 0 0);
-    white-space: nowrap; border: 0;
-  }
-
-  /* ---- marks ---- */
-  .mk { display: block; width: 100%; height: 100%; color: inherit; }
-
-  /* ---- skip link ---- */
   .skip {
-    position: absolute; left: -9999px; top: 0; z-index: 300;
+    position: absolute; left: -9999px; top: 0; z-index: 50;
     font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em;
-    background: var(--ink); color: var(--paper); padding: 12px 20px;
+    background: var(--paper); color: var(--ink); padding: 12px 20px;
   }
   .skip:focus { left: 0; }
+  :focus-visible { outline: 2px solid var(--paper); outline-offset: 4px; }
 
-  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  /* ---- flowing background ---- */
 
-  /* ==========================================================================
-     Classification strip + navigation
-     ========================================================================== */
-
-  .classbar {
-    background: var(--ink);
-    color: var(--muted-rev);
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-  }
-  .classbar-inner {
-    max-width: var(--col);
-    margin: 0 auto;
-    padding: 9px var(--gutter);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 18px;
-  }
-  .classbar .dotmark { color: var(--accent); }
-  .classbar .cb-mid { color: var(--muted-rev); }
-  @media (max-width: 680px) {
-    .classbar .cb-mid { display: none; }
-    .classbar-inner { font-size: 9px; letter-spacing: 0.16em; }
+  .bg {
+    position: fixed; inset: 0; z-index: -2; width: 100%; height: 100%;
+    display: block;
+    /* fallback / pre-paint: a static version of the same palette */
+    background:
+      radial-gradient(80% 70% at 72% 38%, rgba(150,58,40,0.42) 0%, rgba(150,58,40,0) 55%),
+      radial-gradient(70% 60% at 88% 78%, rgba(120,40,32,0.40) 0%, rgba(120,40,32,0) 60%),
+      radial-gradient(90% 80% at 18% 90%, rgba(70,26,26,0.45) 0%, rgba(70,26,26,0) 60%),
+      var(--ink);
   }
 
-  .nav {
-    position: sticky; top: 0; z-index: 100;
-    background: rgba(243, 239, 230, 0.86);
-    backdrop-filter: saturate(140%) blur(10px);
-    -webkit-backdrop-filter: saturate(140%) blur(10px);
-    border-bottom: 1px solid var(--hair);
-  }
-  .nav-inner {
-    max-width: var(--col); margin: 0 auto; padding: 0 var(--gutter);
-    height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 24px;
-  }
-  .nav-logo { display: flex; align-items: center; gap: 13px; text-decoration: none; }
-  .nav-logo .mk { width: 30px; height: 30px; flex: none; }
-  .nav-logo .words { display: flex; flex-direction: column; }
-  .nav-logo .nm {
-    font-family: var(--serif); font-weight: 600; font-size: 19px; line-height: 1; letter-spacing: -0.01em;
-  }
-  .nav-logo .ds {
-    font-family: var(--mono); font-size: 8px; font-weight: 500; letter-spacing: 0.36em;
-    text-transform: uppercase; color: var(--muted); margin-top: 4px;
+  /* legibility lift on the left, where the statement sits */
+  .cover::before {
+    content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    background: linear-gradient(100deg, rgba(20,18,13,0.64) 0%, rgba(20,18,13,0.24) 40%, rgba(20,18,13,0) 68%);
   }
 
-  .nav-links { display: flex; align-items: center; gap: 28px; margin-left: auto; }
-  .nav-links a {
-    font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 0.22em;
-    text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.15s;
-  }
-  .nav-links a:hover { color: var(--ink); }
+  /* ---- cover shell ---- */
 
-  .nav-cta {
-    font-family: var(--mono); font-size: 10.5px; font-weight: 500; letter-spacing: 0.16em;
-    text-transform: uppercase; color: var(--paper); background: var(--ink);
-    text-decoration: none; border: 1px solid var(--ink); padding: 11px 18px;
-    transition: opacity 0.15s;
-  }
-  .nav-cta:hover { opacity: 0.84; }
-
-  .nav-toggle {
-    display: none; background: none; border: 1px solid var(--hair-strong); color: var(--ink);
-    width: 44px; height: 44px; padding: 0; cursor: pointer; align-items: center; justify-content: center;
-  }
-  .nav-toggle svg { display: block; }
-  .nav-toggle .icon-close { display: none; }
-  .nav-toggle[aria-expanded="true"] .icon-open { display: none; }
-  .nav-toggle[aria-expanded="true"] .icon-close { display: block; }
-  .nav-menu { display: contents; }
-
-  @media (max-width: 820px) {
-    .nav-toggle { display: flex; }
-    .nav-menu {
-      display: none; position: absolute; top: 100%; left: 0; right: 0;
-      background: var(--paper); border-bottom: 1px solid var(--hair); padding: 8px var(--gutter) 26px;
-    }
-    .nav-menu.is-open { display: block; }
-    .nav-links { flex-direction: column; align-items: flex-start; gap: 0; margin: 0; }
-    .nav-links a { display: block; width: 100%; padding: 16px 0; border-bottom: 1px solid var(--hair); font-size: 12px; }
-    .nav-cta { display: inline-block; margin-top: 22px; }
+  .cover {
+    position: relative;
+    min-height: 100vh; min-height: 100svh;
+    display: flex; flex-direction: column;
+    padding: clamp(22px, 4vh, 40px) var(--gutter);
+    overflow: hidden;
   }
 
-  /* ==========================================================================
-     Buttons
-     ========================================================================== */
+  .cover-top { display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+  .brand { display: flex; align-items: center; gap: 13px; text-decoration: none; }
+  .brand .mk { width: 32px; height: 32px; display: block; color: var(--paper); }
+  .brand .words { display: flex; flex-direction: column; }
+  .brand .nm { font-family: var(--serif); font-weight: 600; font-size: 19px; line-height: 1; letter-spacing: -0.01em; }
+  .brand .ds { font-family: var(--mono); font-size: 8px; font-weight: 500; letter-spacing: 0.36em; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
+  .cover-loc { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted); }
+
+  .cover-center { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 48px 0; }
+  .kicker {
+    font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 0.32em;
+    text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 28px;
+  }
+  .cover-center h1 {
+    font-family: var(--serif); font-weight: 600;
+    font-size: clamp(44px, 7.4vw, 92px); line-height: 1.0; letter-spacing: -0.022em;
+    margin-left: -0.02em; max-width: 15ch;
+  }
+  .cover-line {
+    font-size: clamp(16.5px, 1.7vw, 20px); line-height: 1.55; color: rgba(243,239,230,0.84);
+    max-width: 44ch; margin-top: 26px;
+  }
+  .cover-cta { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 40px; }
 
   .btn {
-    font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 0.18em;
-    text-transform: uppercase; text-decoration: none; display: inline-flex; align-items: center; gap: 10px;
-    padding: 15px 26px; transition: opacity 0.15s, background 0.15s, color 0.15s, border-color 0.15s;
+    font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase;
+    text-decoration: none; display: inline-flex; align-items: center; gap: 10px; padding: 16px 28px;
+    transition: opacity 0.15s, background 0.15s, color 0.15s, border-color 0.15s;
   }
-  .btn-primary { background: var(--ink); color: var(--paper); border: 1px solid var(--ink); }
-  .btn-primary:hover { opacity: 0.84; }
-  .btn-ghost { background: transparent; color: var(--ink); border: 1px solid var(--hair-strong); }
-  .btn-ghost:hover { border-color: var(--ink); }
-  .btn .arr { font-size: 13px; }
+  .btn-primary { background: var(--paper); color: var(--ink); border: 1px solid var(--paper); }
+  .btn-primary:hover { opacity: 0.88; }
+  .btn-ghost { background: transparent; color: var(--paper); border: 1px solid var(--hair); }
+  .btn-ghost:hover { border-color: rgba(243,239,230,0.5); }
 
-  /* ==========================================================================
-     Cover sheet (hero)
-     ========================================================================== */
-
-  .cover { padding: 56px 0 0; position: relative; }
-
-  .cover-meta {
-    display: flex; flex-wrap: wrap; gap: 8px 34px;
-    font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--muted);
-    padding-bottom: 22px; border-bottom: 1px solid var(--hair);
+  .cover-foot {
+    display: flex; flex-wrap: wrap; gap: 8px 28px; align-items: center;
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted);
+    padding-top: 18px; border-top: 1px solid var(--hair);
   }
-  .cover-meta b { color: var(--ink); font-weight: 500; }
-
-  .cover-grid {
-    display: grid; grid-template-columns: 1fr 300px; gap: 64px;
-    align-items: start; padding: 54px 0 64px;
-  }
-
-  .cover-lead .kicker { display: block; margin-bottom: 26px; }
-  .cover-lead h1 {
-    font-family: var(--serif); font-weight: 600;
-    font-size: clamp(48px, 8.4vw, 104px); line-height: 0.98; letter-spacing: -0.024em;
-    margin-left: -0.02em;
-  }
-  .cover-tagline {
-    font-family: var(--serif); font-style: italic; font-weight: 500;
-    font-size: clamp(18px, 2.2vw, 23px); line-height: 1.35; color: var(--accent);
-    margin-top: 26px; max-width: 30ch;
-  }
-  .cover-sub {
-    font-size: clamp(16.5px, 1.7vw, 19px); line-height: 1.62; color: var(--body);
-    max-width: 52ch; margin-top: 22px;
-  }
-  .cover-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 38px; }
-
-  /* summary box — looks like a dossier abstract */
-  .cover-summary { border: 1px solid var(--hair-strong); background: var(--raise); }
-  .cover-summary h2 {
-    font-family: var(--mono); font-size: 10px; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase;
-    color: var(--muted); padding: 14px 20px; border-bottom: 1px solid var(--hair);
-    display: flex; align-items: center; justify-content: space-between;
-  }
-  .cover-summary .sig { width: 19px; height: 19px; display: block; color: var(--accent); flex: none; }
-  .summary-row { padding: 15px 20px; border-bottom: 1px solid var(--hair); }
-  .summary-row:last-child { border-bottom: 0; }
-  .summary-row .k {
-    font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted);
-  }
-  .summary-row .v { font-family: var(--serif); font-size: 18px; margin-top: 6px; }
-
-  @media (max-width: 880px) {
-    .cover-grid { grid-template-columns: 1fr; gap: 44px; }
-    .cover-summary { max-width: 460px; }
-  }
-
-  /* ==========================================================================
-     Section scaffold
-     ========================================================================== */
-
-  section { padding: 100px 0; }
-  @media (max-width: 720px) { section { padding: 64px 0; } }
-
-  .band-cell { background: var(--cell); border-top: 1px solid var(--hair); border-bottom: 1px solid var(--hair); }
-  .band-ink  { background: var(--ink); color: var(--paper); }
-
-  .sec-head { margin-bottom: 56px; }
-  .sec-label { display: flex; align-items: center; gap: 18px; margin-bottom: 20px; }
-  .sec-label .num {
-    font-family: var(--mono); font-size: 12px; font-weight: 500; letter-spacing: 0.22em; color: var(--muted);
-    border-left: 2px solid var(--accent); padding-left: 11px; white-space: nowrap;
-  }
-  .sec-label .line { flex: 1; height: 1px; background: var(--hair); }
-  .sec-head h2 {
-    font-family: var(--serif); font-weight: 600; font-size: clamp(32px, 5vw, 56px);
-    line-height: 1.02; letter-spacing: -0.02em;
-  }
-  .sec-head .lede { font-size: 18px; line-height: 1.62; color: var(--body); max-width: 58ch; margin-top: 20px; }
-
-  .band-ink .sec-label .num { color: var(--muted-rev); }
-  .band-ink .sec-label .line { background: var(--hair-rev); }
-  .band-ink .sec-head .lede { color: var(--body-rev); }
-
-  /* ==========================================================================
-     01 Services — ledger
-     ========================================================================== */
-
-  .ledger { border-bottom: 1px solid var(--hair); }
-  .svc {
-    display: grid; grid-template-columns: 56px 1fr; gap: 28px; align-items: baseline;
-    border-top: 1px solid var(--hair); padding: 26px 0;
-    transition: background 0.18s;
-  }
-  .svc:hover { background: var(--raise); }
-  .svc-num { font-family: var(--mono); font-size: 12px; letter-spacing: 0.18em; color: var(--accent); }
-  .svc-main h3 {
-    font-family: var(--serif); font-weight: 600; font-size: clamp(20px, 2.3vw, 26px);
-    line-height: 1.1; letter-spacing: -0.016em;
-  }
-  .svc-desc {
-    font-family: var(--serif); font-style: italic; font-size: 15.5px; line-height: 1.5;
-    color: var(--body); margin-top: 9px; max-width: 64ch;
-  }
-  .ledger-foot {
-    display: flex; flex-wrap: wrap; gap: 22px 32px; align-items: center; justify-content: space-between;
-    margin-top: 32px;
-  }
-  .ledger-foot p { font-size: 16px; color: var(--body); max-width: 52ch; }
-
-  @media (max-width: 620px) {
-    .svc { grid-template-columns: 1fr; gap: 6px; }
-    .svc-num { grid-row: 1; }
-  }
-
-  /* ==========================================================================
-     02 Methodology — steps + sources
-     ========================================================================== */
-
-  .steps { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 4px; gap: 0; }
-  .step { position: relative; padding: 34px 26px 0 0; }
-  .step::before { content: ""; position: absolute; top: 0; left: 0; width: 9px; height: 9px; background: var(--accent); }
-  .step::after { content: ""; position: absolute; top: 4px; left: 9px; right: 0; height: 1px; background: var(--hair-strong); }
-  .step:last-child::after { display: none; }
-  .step-n { font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; color: var(--muted); margin-bottom: 14px; }
-  .step h3 { font-family: var(--serif); font-weight: 600; font-size: 19px; line-height: 1.2; letter-spacing: -0.016em; margin-bottom: 9px; }
-  .step p { font-size: 14.5px; line-height: 1.62; color: var(--body); }
-
-  @media (max-width: 760px) {
-    .steps { grid-template-columns: 1fr; }
-    .step { padding: 0 0 32px 28px; }
-    .step::before { top: 4px; }
-    .step::after { top: 13px; left: 4px; right: auto; bottom: 0; width: 1px; height: auto; }
-    .step:last-child { padding-bottom: 0; }
-  }
-
-  .sources { margin-top: 64px; padding-top: 40px; border-top: 1px solid var(--hair); }
-  .sources .src-kicker { display: block; margin-bottom: 16px; }
-  .sources .src-intro { font-size: 16.5px; line-height: 1.6; color: var(--body); max-width: 64ch; margin-bottom: 26px; }
-  .src-tags { display: flex; flex-wrap: wrap; gap: 10px; }
-  .src-tag {
-    font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.06em; color: var(--muted);
-    border: 1px solid var(--hair-strong); padding: 8px 14px; white-space: nowrap; background: var(--raise);
-  }
-
-  /* ==========================================================================
-     03 Sample work — the proof
-     ========================================================================== */
-
-  .dossier {
-    border: 1px solid var(--hair-strong); background: var(--raise);
-    display: grid; grid-template-columns: 1.15fr 1fr; gap: 0;
-  }
-  .dossier > * { padding: 34px 36px; }
-  .dossier-table-cell { border-right: 1px solid var(--hair); }
-
-  .doc-stamp {
-    font-family: var(--mono); font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase;
-    color: var(--accent); margin-bottom: 8px;
-  }
-  .doc-subject {
-    font-family: var(--mono); font-size: 13px; letter-spacing: 0.04em; color: var(--ink);
-    margin-bottom: 24px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
-  }
-  .redact {
-    background: var(--ink); color: var(--ink);
-    padding: 0 4px; border-radius: 1px; user-select: none; letter-spacing: 0.05em;
-  }
-
-  table.risk { width: 100%; border-collapse: collapse; font-family: var(--mono); }
-  table.risk th, table.risk td { text-align: left; padding: 12px 4px; border-bottom: 1px solid var(--hair); }
-  table.risk thead th {
-    font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); font-weight: 500;
-    padding-bottom: 10px;
-  }
-  table.risk td.dim { font-size: 13px; color: var(--body); letter-spacing: 0.01em; }
-  table.risk tr.overall td { border-bottom: 0; border-top: 1px solid var(--hair-strong); padding-top: 14px; }
-  table.risk tr.overall td.dim { color: var(--ink); font-weight: 500; }
-
-  .rate {
-    display: inline-flex; align-items: center; gap: 9px;
-    font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
-  }
-  .rate .dot { width: 9px; height: 9px; border-radius: 50%; flex: none; }
-  .rate-green { color: var(--st-green); } .rate-green .dot { background: var(--st-green); }
-  .rate-amber { color: var(--st-amber); } .rate-amber .dot { background: var(--st-amber); }
-  .rate-red   { color: var(--st-red);   } .rate-red   .dot { background: var(--st-red); }
-
-  .dossier-side { display: flex; flex-direction: column; }
-  .case-study { }
-  .case-study .cs-title {
-    font-family: var(--serif); font-weight: 600; font-size: 21px; line-height: 1.2; letter-spacing: -0.014em; margin-bottom: 12px;
-  }
-  .case-study p { font-size: 15.5px; line-height: 1.62; color: var(--body); }
-  .case-study .cs-label {
-    font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
-    color: var(--muted); margin-top: 18px;
-  }
-  .dossier-side .cs-divider { height: 1px; background: var(--hair); margin: 26px 0; }
-  .dossier-download { margin-top: auto; padding-top: 8px; }
-  .dossier-download .note {
-    font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--muted); margin-top: 14px;
-  }
-
-  @media (max-width: 860px) {
-    .dossier { grid-template-columns: 1fr; }
-    .dossier-table-cell { border-right: 0; border-bottom: 1px solid var(--hair); }
-  }
-  @media (max-width: 480px) {
-    .dossier > * { padding: 26px 22px; }
-  }
-
-  /* ==========================================================================
-     04 Clients
-     ========================================================================== */
-
-  .clients-band { background: var(--raise); border: 1px solid var(--hair); padding: 30px 24px; }
-  .clients-grid { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; }
-  .client {
-    font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 0.18em;
-    text-transform: uppercase; color: var(--body); white-space: nowrap; padding: 6px 0;
-  }
-  .client:not(:last-child)::after { content: "·"; color: var(--accent); margin: 0 20px; }
-  @media (max-width: 560px) {
-    .client { margin: 0 12px; }
-    .client:not(:last-child)::after { display: none; }
-  }
-
-  /* ==========================================================================
-     05 About
-     ========================================================================== */
-
-  .about-text { max-width: 74ch; }
-  .about-text p { font-size: 17.5px; line-height: 1.78; color: var(--body); }
-  .about-text p + p { margin-top: 20px; }
-  .about-text p strong, .about-text .lead { color: var(--ink); font-weight: 500; }
-
-  .principles {
-    list-style: none; padding: 0; margin-top: 54px;
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    border-top: 1px solid var(--hair); border-left: 1px solid var(--hair);
-  }
-  .principle { border-right: 1px solid var(--hair); border-bottom: 1px solid var(--hair); padding: 26px 24px 30px; }
-  .principle .p-name {
-    font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 0.24em; text-transform: uppercase; color: var(--ink);
-  }
-  .principle .p-desc { font-family: var(--serif); font-size: 16px; line-height: 1.5; color: var(--body); margin-top: 11px; }
-  @media (max-width: 700px) { .principles { grid-template-columns: 1fr; } }
-
-  /* ==========================================================================
-     06 Contact (ink)
-     ========================================================================== */
-
-  .contact { position: relative; overflow: hidden; }
-  .contact-wm {
-    position: absolute; right: -6%; bottom: -20%; width: clamp(280px, 38vw, 520px); aspect-ratio: 1;
-    color: var(--paper); opacity: 0.05; pointer-events: none;
-  }
-  .contact .wrap { position: relative; }
-  .contact-links { display: flex; flex-direction: column; max-width: 580px; margin-top: 6px; border-top: 1px solid var(--hair-rev); }
-  .contact-link {
-    display: flex; align-items: center; justify-content: space-between; gap: 24px;
-    padding: 22px 0; border-bottom: 1px solid var(--hair-rev); text-decoration: none; transition: opacity 0.15s;
-  }
-  a.contact-link:hover { opacity: 0.66; }
-  .contact-link .cl-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted-rev); margin-bottom: 6px; }
-  .contact-link .cl-val { font-size: 17px; }
-  .contact-link .cl-arr { font-family: var(--mono); font-size: 18px; color: var(--muted-rev); }
-
-  /* ==========================================================================
-     Footer
-     ========================================================================== */
-
-  footer { background: var(--ink); color: var(--muted-rev); border-top: 1px solid var(--hair-rev); padding: 30px 0; }
-  .footer-inner {
-    max-width: var(--col); margin: 0 auto; padding: 0 var(--gutter);
-    display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap;
-  }
-  .footer-logo { display: flex; align-items: center; gap: 12px; color: var(--paper); text-decoration: none; }
-  .footer-logo .mk { width: 22px; height: 22px; }
-  .footer-logo .wm { font-family: var(--serif); font-weight: 600; font-size: 15px; letter-spacing: -0.01em; }
-  .footer-copy { font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; }
-
-  /* ==========================================================================
-     Scroll reveal
-     ========================================================================== */
-
-  .reveal {
-    opacity: 0; transform: translateY(18px);
-    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-    transition-delay: var(--d, 0s);
-  }
-  .reveal.is-visible { opacity: 1; transform: none; }
-  @media (prefers-reduced-motion: reduce) {
-    .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
-  }
+  .cover-foot a { text-decoration: none; transition: color 0.15s; }
+  .cover-foot a:hover { color: var(--paper); }
+  .cover-foot .spacer { flex: 1; }
+  @media (max-width: 560px) { .cover-foot .spacer { display: none; } .cover-foot { gap: 8px 18px; } }
   </style>
 </head>
 <body>
 
-<a class="skip" href="#main">Skip to content</a>
+<a class="skip" href="#cover-center">Skip to content</a>
 
-<!-- Signal mark — primary brand. 4×4 dot field, solid dot at row 2 / col 3.
-     All geometry uses currentColor so it themes via CSS. Do not alter. -->
+<canvas class="bg" id="bg" aria-hidden="true"></canvas>
+
+<!-- Signal mark — primary brand. 4×4 dot field, solid dot at row 2 / col 3. -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
   <defs>
     <symbol id="m-signal" viewBox="0 0 100 100">
@@ -558,423 +180,142 @@
   </defs>
 </svg>
 
-<!-- ── Classification strip ── -->
-<div class="classbar">
-  <div class="classbar-inner">
-    <span><span class="dotmark">■</span>&nbsp; Classification — Open Source Intelligence</span>
-    <span class="cb-mid">Independent Due Diligence</span>
-    <span>File Ref — LR · Oslo</span>
-  </div>
-</div>
+<main class="cover">
 
-<!-- ── Navigation ── -->
-<nav class="nav" aria-label="Main">
-  <div class="nav-inner">
-    <a class="nav-logo" href="#top" aria-label="Libra Research — home">
+  <header class="cover-top">
+    <a class="brand" href="/" aria-label="Libra Research — home">
       <svg class="mk" aria-hidden="true"><use href="#m-signal"/></svg>
       <span class="words">
         <span class="nm">Libra</span>
         <span class="ds">Research</span>
       </span>
     </a>
-    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Menu">
-      <svg class="icon-open" width="18" height="14" viewBox="0 0 18 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M0 1h18M0 7h18M0 13h18"/></svg>
-      <svg class="icon-close" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 1l12 12M13 1L1 13"/></svg>
-    </button>
-    <div class="nav-menu" id="nav-menu">
-      <div class="nav-links">
-        <a href="#services">Services</a>
-        <a href="#methodology">Methodology</a>
-        <a href="#sample">Sample</a>
-        <a href="#clients">Clients</a>
-        <a href="#about">About</a>
-      </div>
-      <a class="nav-cta" href="#contact">Get in touch</a>
+    <span class="cover-loc">Oslo · Norway</span>
+  </header>
+
+  <div class="cover-center" id="cover-center">
+    <span class="kicker">Independent Due Diligence</span>
+    <h1>Know who you&rsquo;re dealing with.</h1>
+    <p class="cover-line">Source-cited due diligence on companies and individuals — Nordic-native, discreet, and fully auditable.</p>
+    <div class="cover-cta">
+      <a class="btn btn-primary" href="mailto:adrian@libraresearch.no?subject=Due%20diligence%20enquiry">Request a quote <span aria-hidden="true">&rarr;</span></a>
+      <a class="btn btn-ghost" href="mailto:adrian@libraresearch.no">Email us</a>
     </div>
   </div>
-</nav>
 
-<!-- ── Cover sheet (hero) ── -->
-<header class="cover" id="top">
-  <div class="wrap">
-    <div class="cover-meta" data-reveal>
-      <span>Subject&nbsp; <b>Companies &amp; Individuals</b></span>
-      <span>Coverage&nbsp; <b>Nordics &amp; International</b></span>
-      <span>Status&nbsp; <b>Accepting mandates</b></span>
-    </div>
-    <div class="cover-grid">
-      <div class="cover-lead" data-reveal>
-        <span class="kicker">OSINT Due Diligence · Nordics &amp; Beyond</span>
-        <h1>Know who<br>you&rsquo;re dealing<br>with.</h1>
-        <p class="cover-tagline">Nordic due diligence, done by people who know where to look.</p>
-        <p class="cover-sub">Libra Research delivers analyst-grade dossiers on companies and individuals — every finding documented, every source traceable — so you can act with confidence.</p>
-        <div class="cover-actions">
-          <a class="btn btn-primary" href="#contact">Commission a report <span class="arr" aria-hidden="true">&rarr;</span></a>
-          <a class="btn btn-ghost" href="#sample">See sample work</a>
-        </div>
-      </div>
-      <aside class="cover-summary" data-reveal aria-label="At a glance">
-        <h2><span>Summary</span><svg class="sig" aria-hidden="true"><use href="#m-signal"/></svg></h2>
-        <div class="summary-row">
-          <div class="k">Turnaround</div>
-          <div class="v">24–48 hours</div>
-        </div>
-        <div class="summary-row">
-          <div class="k">Methodology</div>
-          <div class="v">100% open source</div>
-        </div>
-        <div class="summary-row">
-          <div class="k">Output</div>
-          <div class="v">Fully auditable</div>
-        </div>
-        <div class="summary-row">
-          <div class="k">Base</div>
-          <div class="v">Oslo, Norway</div>
-        </div>
-      </aside>
-    </div>
-  </div>
-</header>
-
-<main id="main">
-
-  <!-- ── 01 Services ── -->
-  <section id="services" aria-labelledby="services-h">
-    <div class="wrap">
-      <div class="sec-head" data-reveal>
-        <div class="sec-label">
-          <span class="num">01 / SERVICES</span>
-          <span class="line" aria-hidden="true"></span>
-        </div>
-        <h2 id="services-h">Structured dossiers.<br>Traceable sources.</h2>
-        <p class="lede">Source-cited intelligence built entirely on open sources. Every finding documented, every claim verifiable — no proprietary black boxes.</p>
-      </div>
-      <div class="ledger" data-reveal-stagger>
-        <article class="svc">
-          <div class="svc-num">01</div>
-          <div class="svc-main">
-            <h3>Corporate Due Diligence</h3>
-            <p class="svc-desc">Identity, ownership, financials, litigation, and adverse media — everything needed to know who you're dealing with before a transaction or onboarding decision. Delivered in 48 hours.</p>
-          </div>
-        </article>
-        <article class="svc">
-          <div class="svc-num">02</div>
-          <div class="svc-main">
-            <h3>Enhanced Due Diligence</h3>
-            <p class="svc-desc">Deep-dive investigation for high-risk subjects: full UBO trace through all layers, multi-jurisdiction registry checks, 3-year financial analysis, and expanded adverse media in multiple languages. 5-day turnaround.</p>
-          </div>
-        </article>
-        <article class="svc">
-          <div class="svc-num">03</div>
-          <div class="svc-main">
-            <h3>Adverse Media &amp; Sanctions Screening</h3>
-            <p class="svc-desc">Rapid screening against major sanctions lists (UN, EU, OFAC, HM Treasury) and adverse media sources. Dual-language (Norwegian and English). Available as standalone or included in all CDD/EDD engagements.</p>
-          </div>
-        </article>
-        <article class="svc">
-          <div class="svc-num">04</div>
-          <div class="svc-main">
-            <h3>Beneficial Ownership (UBO) Mapping</h3>
-            <p class="svc-desc">Trace ultimate beneficial owners through all corporate layers using Norwegian and international registries. Standalone service or included within CDD/EDD reports.</p>
-          </div>
-        </article>
-        <article class="svc">
-          <div class="svc-num">05</div>
-          <div class="svc-main">
-            <h3>Ongoing Monitoring Retainer</h3>
-            <p class="svc-desc">Monthly re-screening of existing counterparties against sanctions lists, adverse media, and ownership changes. Immediate alert on material findings. Priced per subject, with volume discounts available.</p>
-          </div>
-        </article>
-        <article class="svc">
-          <div class="svc-num">06</div>
-          <div class="svc-main">
-            <h3>Bespoke Intelligence</h3>
-            <p class="svc-desc">Custom investigations for scope that falls outside standard tiers — multi-entity corporate groups, cross-border structures, or time-sensitive requests. Quoted on engagement.</p>
-          </div>
-        </article>
-      </div>
-      <div class="ledger-foot" data-reveal>
-        <p>Every engagement is scoped and priced before work begins. No hourly billing, no surprises.</p>
-        <a href="#contact" class="btn btn-primary">Request a quote <span class="arr" aria-hidden="true">&rarr;</span></a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── 02 Methodology ── -->
-  <section class="band-cell" id="methodology" aria-labelledby="methodology-h">
-    <div class="wrap">
-      <div class="sec-head" data-reveal>
-        <div class="sec-label">
-          <span class="num">02 / METHODOLOGY</span>
-          <span class="line" aria-hidden="true"></span>
-        </div>
-        <h2 id="methodology-h">Weighing evidence.</h2>
-        <p class="lede">Every report follows the same structured process — no assumptions, no unverified claims. The unknown is set against the verified, and we report where the balance falls.</p>
-      </div>
-      <div class="steps" data-reveal-stagger>
-        <div class="step">
-          <div class="step-n">01</div>
-          <h3>Brief</h3>
-          <p>You tell us who or what to investigate, and what decisions are riding on the findings.</p>
-        </div>
-        <div class="step">
-          <div class="step-n">02</div>
-          <h3>Collection</h3>
-          <p>We systematically gather data across corporate registries, court records, media, regulatory filings, and open databases.</p>
-        </div>
-        <div class="step">
-          <div class="step-n">03</div>
-          <h3>Analysis</h3>
-          <p>Raw findings are verified, cross-referenced, and assessed for materiality. Every red flag is evaluated in context.</p>
-        </div>
-        <div class="step">
-          <div class="step-n">04</div>
-          <h3>Report</h3>
-          <p>A structured, cited dossier lands in your inbox within 24–48 hours. Ready to act on.</p>
-        </div>
-      </div>
-
-      <!-- Change 1 — named sources -->
-      <div class="sources" data-reveal>
-        <span class="kicker src-kicker">Sources we work with</span>
-        <p class="src-intro">We draw on the same primary registries and watchlists used by regulators and banks — not a Google-search version of OSINT.</p>
-        <div class="src-tags">
-          <span class="src-tag">Brønnøysundregistrene</span>
-          <span class="src-tag">Enhetsregisteret</span>
-          <span class="src-tag">Konkursregisteret</span>
-          <span class="src-tag">Lovdata</span>
-          <span class="src-tag">Proff.no</span>
-          <span class="src-tag">Finanstilsynet</span>
-          <span class="src-tag">OpenCorporates</span>
-          <span class="src-tag">OFAC</span>
-          <span class="src-tag">UN Consolidated List</span>
-          <span class="src-tag">EU Sanctions List</span>
-          <span class="src-tag">HM Treasury</span>
-          <span class="src-tag">Interpol Notices</span>
-          <span class="src-tag">WHOIS</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── 03 Sample work ── -->
-  <section id="sample" aria-labelledby="sample-h">
-    <div class="wrap">
-      <div class="sec-head" data-reveal>
-        <div class="sec-label">
-          <span class="num">03 / SAMPLE WORK</span>
-          <span class="line" aria-hidden="true"></span>
-        </div>
-        <h2 id="sample-h">See the work<br>before you buy it.</h2>
-        <p class="lede">Most providers can't show you a report. We can. Below is an illustrative extract from a standard customer due diligence dossier — and the full anonymized sample, in the format you'd receive.</p>
-      </div>
-
-      <div class="dossier" data-reveal>
-        <div class="dossier-table-cell">
-          <div class="doc-stamp">Risk Assessment — Illustrative Extract</div>
-          <p class="doc-subject">Subject: <span class="redact" role="img" aria-label="redacted">████████</span> Facility AS · Standard CDD</p>
-          <table class="risk">
-            <caption class="vh">Illustrative risk-assessment ratings by dimension</caption>
-            <thead>
-              <tr><th scope="col">Dimension</th><th scope="col">Rating</th></tr>
-            </thead>
-            <tbody>
-              <tr><td class="dim">Corporate legitimacy</td><td><span class="rate rate-green"><span class="dot" aria-hidden="true"></span>Green</span></td></tr>
-              <tr><td class="dim">Ownership transparency</td><td><span class="rate rate-amber"><span class="dot" aria-hidden="true"></span>Amber</span></td></tr>
-              <tr><td class="dim">Financial health</td><td><span class="rate rate-amber"><span class="dot" aria-hidden="true"></span>Amber</span></td></tr>
-              <tr><td class="dim">Legal &amp; regulatory</td><td><span class="rate rate-green"><span class="dot" aria-hidden="true"></span>Green</span></td></tr>
-              <tr><td class="dim">Adverse media</td><td><span class="rate rate-green"><span class="dot" aria-hidden="true"></span>Green</span></td></tr>
-              <tr><td class="dim">Sanctions / PEP exposure</td><td><span class="rate rate-green"><span class="dot" aria-hidden="true"></span>Green</span></td></tr>
-              <tr class="overall"><td class="dim">Overall</td><td><span class="rate rate-amber"><span class="dot" aria-hidden="true"></span>Amber</span></td></tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="dossier-side">
-          <!-- Change 5 — case-study vignette -->
-          <div class="case-study">
-            <div class="cs-title">Finding that changed a deal</div>
-            <p>A Nordic PE firm commissioned a standard CDD before signing an LOI. Our screening identified undisclosed litigation and a UBO connected to a previously dissolved entity under investigation. The deal was restructured.</p>
-            <div class="cs-label">Illustrative example</div>
-          </div>
-          <div class="cs-divider" aria-hidden="true"></div>
-          <div class="dossier-download">
-            <a class="btn btn-primary" href="sample-report.pdf" download rel="noopener">Download full sample report (PDF) <span class="arr" aria-hidden="true">&darr;</span></a>
-            <p class="note">Anonymized · 8 pages · No real subject identified</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── 04 Clients ── -->
-  <section id="clients" aria-labelledby="clients-h">
-    <div class="wrap">
-      <div class="sec-head" data-reveal>
-        <div class="sec-label">
-          <span class="num">04 / CLIENTS</span>
-          <span class="line" aria-hidden="true"></span>
-        </div>
-        <h2 id="clients-h">Built for professionals<br>who need certainty.</h2>
-      </div>
-      <div class="clients-band" data-reveal>
-        <div class="clients-grid">
-          <span class="client">M&amp;A advisors</span>
-          <span class="client">Private equity firms</span>
-          <span class="client">Law firms</span>
-          <span class="client">Compliance teams</span>
-          <span class="client">Fintech lenders</span>
-          <span class="client">Corporate development</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── 05 About ── -->
-  <section id="about" aria-labelledby="about-h">
-    <div class="wrap">
-      <div class="sec-head" data-reveal>
-        <div class="sec-label">
-          <span class="num">05 / ABOUT</span>
-          <span class="line" aria-hidden="true"></span>
-        </div>
-        <h2 id="about-h">Serious research.<br>No fluff.</h2>
-      </div>
-      <div class="about-text" data-reveal>
-        <p>Libra Research is an independent due diligence practice based in Oslo. We produce structured, analyst-grade dossiers on companies and individuals using open-source intelligence — fully auditable, no proprietary black boxes.</p>
-        <p>Our methodology is built on the same principles applied in regulated AML and financial crime investigations inside Norwegian financial institutions — systematic collection, rigorous verification, and full source documentation. What you receive is a report you can stand behind.</p>
-        <p>We work natively across Norwegian and Scandinavian registries — the same sources regulators and banks use — and extend internationally where the subject demands it, on mandates ranging from pre-acquisition screening to ongoing counterparty monitoring.</p>
-      </div>
-      <ul class="principles" data-reveal-stagger>
-        <li class="principle">
-          <div class="p-name">Independent</div>
-          <div class="p-desc">No conflicts · No commissions</div>
-        </li>
-        <li class="principle">
-          <div class="p-name">Auditable</div>
-          <div class="p-desc">Every source cited</div>
-        </li>
-        <li class="principle">
-          <div class="p-name">Discreet</div>
-          <div class="p-desc">Confidential by default</div>
-        </li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- ── 06 Contact ── -->
-  <section class="band-ink contact" id="contact" aria-labelledby="contact-h">
-    <div class="contact-wm" aria-hidden="true">
-      <svg class="mk"><use href="#m-signal"/></svg>
-    </div>
-    <div class="wrap">
-      <div class="sec-head" data-reveal>
-        <div class="sec-label">
-          <span class="num">06 / CONTACT</span>
-          <span class="line" aria-hidden="true"></span>
-        </div>
-        <h2 id="contact-h">Start a conversation.</h2>
-        <p class="lede">Tell us what you need to know. We'll confirm scope, pricing, and turnaround within one business day.</p>
-      </div>
-      <div class="contact-links" data-reveal>
-        <a class="contact-link" href="mailto:adrian@libraresearch.no">
-          <span>
-            <span class="cl-label">Email</span><br>
-            <span class="cl-val">adrian@libraresearch.no</span>
-          </span>
-          <span class="cl-arr" aria-hidden="true">&rarr;</span>
-        </a>
-        <a class="contact-link" href="https://www.linkedin.com/company/certa-research/" target="_blank" rel="noopener">
-          <span>
-            <span class="cl-label">LinkedIn</span><br>
-            <span class="cl-val">Libra Research</span>
-          </span>
-          <span class="cl-arr" aria-hidden="true">&rarr;</span>
-        </a>
-        <div class="contact-link">
-          <span>
-            <span class="cl-label">Location</span><br>
-            <span class="cl-val">Oslo, Norway</span>
-          </span>
-        </div>
-      </div>
-    </div>
-  </section>
+  <footer class="cover-foot">
+    <a href="mailto:adrian@libraresearch.no">adrian@libraresearch.no</a>
+    <a href="https://www.linkedin.com/company/certa-research/" target="_blank" rel="noopener">LinkedIn</a>
+    <span class="spacer"></span>
+    <span>&copy; <span id="year">2026</span> Libra Research</span>
+  </footer>
 
 </main>
 
-<!-- ── Footer ── -->
-<footer>
-  <div class="footer-inner">
-    <a class="footer-logo" href="#top">
-      <svg class="mk" aria-hidden="true"><use href="#m-signal"/></svg>
-      <span class="wm">Libra Research</span>
-    </a>
-    <span class="footer-copy">Oslo · Norway · <span id="year">2026</span></span>
-  </div>
-</footer>
-
 <script>
-/* Libra Research — progressive enhancement only.
-   The site is fully functional and fully visible without JavaScript. */
-(function () {
-  'use strict';
+  /* Footer year. */
+  (function () {
+    var y = document.getElementById('year');
+    if (y) { y.textContent = String(new Date().getFullYear()); }
+  })();
 
-  /* ── Mobile navigation ── */
-  var toggle = document.querySelector('.nav-toggle');
-  var menu = document.getElementById('nav-menu');
-  if (toggle && menu) {
-    toggle.addEventListener('click', function () {
-      var open = toggle.getAttribute('aria-expanded') === 'true';
-      toggle.setAttribute('aria-expanded', String(!open));
-      menu.classList.toggle('is-open', !open);
-    });
-    menu.addEventListener('click', function (e) {
-      if (e.target.closest('a')) {
-        toggle.setAttribute('aria-expanded', 'false');
-        menu.classList.remove('is-open');
-      }
-    });
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && menu.classList.contains('is-open')) {
-        toggle.setAttribute('aria-expanded', 'false');
-        menu.classList.remove('is-open');
-        toggle.focus();
-      }
-    });
-  }
+  /* ---- Flowing gradient background (WebGL) ----
+     Domain-warped simplex noise mapped to the Libra warm palette. Slow + subtle.
+     Falls back to the canvas's CSS gradient if WebGL is unavailable or the user
+     prefers reduced motion. */
+  (function () {
+    var canvas = document.getElementById('bg');
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var gl = null;
+    try { gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl'); } catch (e) { gl = null; }
+    if (!gl) { return; }            // CSS gradient on .bg remains as the backdrop
+    canvas.style.background = 'none'; // hand over to the shader
 
-  /* ── Scroll reveal ── */
-  var targets = [];
-  document.querySelectorAll('[data-reveal]').forEach(function (el) {
-    el.classList.add('reveal');
-    targets.push(el);
-  });
-  document.querySelectorAll('[data-reveal-stagger]').forEach(function (group) {
-    Array.prototype.forEach.call(group.children, function (child, i) {
-      child.classList.add('reveal');
-      child.style.setProperty('--d', (i * 0.06) + 's');
-      targets.push(child);
-    });
-  });
+    var vsrc = 'attribute vec2 a; void main(){ gl_Position = vec4(a,0.0,1.0); }';
+    var fsrc = [
+      'precision highp float;',
+      'uniform vec2 u_res; uniform float u_time;',
+      'vec3 mod289(vec3 x){return x-floor(x*(1.0/289.0))*289.0;}',
+      'vec2 mod289(vec2 x){return x-floor(x*(1.0/289.0))*289.0;}',
+      'vec3 permute(vec3 x){return mod289(((x*34.0)+1.0)*x);}',
+      'float snoise(vec2 v){',
+      '  const vec4 C=vec4(0.211324865405187,0.366025403784439,-0.577350269189626,0.024390243902439);',
+      '  vec2 i=floor(v+dot(v,C.yy)); vec2 x0=v-i+dot(i,C.xx);',
+      '  vec2 i1=(x0.x>x0.y)?vec2(1.0,0.0):vec2(0.0,1.0);',
+      '  vec4 x12=x0.xyxy+C.xxzz; x12.xy-=i1; i=mod289(i);',
+      '  vec3 p=permute(permute(i.y+vec3(0.0,i1.y,1.0))+i.x+vec3(0.0,i1.x,1.0));',
+      '  vec3 m=max(0.5-vec3(dot(x0,x0),dot(x12.xy,x12.xy),dot(x12.zw,x12.zw)),0.0);',
+      '  m=m*m; m=m*m;',
+      '  vec3 x=2.0*fract(p*C.www)-1.0; vec3 h=abs(x)-0.5; vec3 ox=floor(x+0.5); vec3 a0=x-ox;',
+      '  m*=1.79284291400159-0.85373472095314*(a0*a0+h*h);',
+      '  vec3 g; g.x=a0.x*x0.x+h.x*x0.y; g.yz=a0.yz*x12.xz+h.yz*x12.yw;',
+      '  return 130.0*dot(m,g);',
+      '}',
+      'float fbm(vec2 p){ float s=0.0,a=0.5; for(int i=0;i<4;i++){ s+=a*snoise(p); p*=2.0; a*=0.5; } return s; }',
+      'void main(){',
+      '  vec2 uv=gl_FragCoord.xy/u_res.xy;',
+      '  vec2 p=vec2(uv.x*(u_res.x/u_res.y),uv.y);',
+      '  float t=u_time*0.008;',
+      '  vec2 q=vec2(fbm(p*0.4+vec2(0.0,t)),fbm(p*0.4+vec2(4.3,-t)));',
+      '  float n=fbm(p*0.44+q*1.25+vec2(t*0.35,-t*0.2)); n=n*0.5+0.5;',
+      '  vec3 ink=vec3(0.085,0.07,0.058);',
+      '  vec3 maroon=vec3(0.30,0.11,0.10);',
+      '  vec3 oxb=vec3(0.58,0.22,0.16);',
+      '  vec3 ember=vec3(0.82,0.42,0.28);',
+      '  vec3 sand=vec3(0.88,0.74,0.55);',
+      '  vec3 col=ink;',
+      '  col=mix(col,maroon,smoothstep(0.24,0.54,n));',
+      '  col=mix(col,oxb,   smoothstep(0.48,0.74,n));',
+      '  col=mix(col,ember, smoothstep(0.70,0.90,n));',
+      '  col=mix(col,sand,  smoothstep(0.88,1.0,n)*0.50);',
+      '  col=mix(ink,col,0.92);',
+      '  float vig=smoothstep(1.35,0.15,length(uv-0.5)); col*=mix(0.70,1.0,vig);',
+      '  gl_FragColor=vec4(col,1.0);',
+      '}'
+    ].join('\n');
 
-  if (!('IntersectionObserver' in window)) {
-    targets.forEach(function (el) { el.classList.add('is-visible'); });
-  } else {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          io.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
-    targets.forEach(function (el) { io.observe(el); });
-  }
+    function sh(type, src) {
+      var s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s);
+      if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) { return null; }
+      return s;
+    }
+    var vs = sh(gl.VERTEX_SHADER, vsrc), fs = sh(gl.FRAGMENT_SHADER, fsrc);
+    if (!vs || !fs) { return; }
+    var prog = gl.createProgram(); gl.attachShader(prog, vs); gl.attachShader(prog, fs); gl.linkProgram(prog);
+    if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) { return; }
+    gl.useProgram(prog);
 
-  /* ── Footer year ── */
-  var year = document.getElementById('year');
-  if (year) { year.textContent = String(new Date().getFullYear()); }
-})();
+    var buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 3,-1, -1,3]), gl.STATIC_DRAW);
+    var loc = gl.getAttribLocation(prog, 'a'); gl.enableVertexAttribArray(loc);
+    gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+    var uRes = gl.getUniformLocation(prog, 'u_res'), uTime = gl.getUniformLocation(prog, 'u_time');
+
+    function resize() {
+      var dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      var w = Math.floor(canvas.clientWidth * dpr), h = Math.floor(canvas.clientHeight * dpr);
+      if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; gl.viewport(0, 0, w, h); }
+    }
+    window.addEventListener('resize', resize);
+
+    var start = performance.now(), raf = null, running = false;
+    function draw(now) {
+      resize();
+      gl.uniform2f(uRes, canvas.width, canvas.height);
+      gl.uniform1f(uTime, (now - start) / 1000);
+      gl.drawArrays(gl.TRIANGLES, 0, 3);
+      if (running) { raf = requestAnimationFrame(draw); }
+    }
+    function play()  { if (!running && !reduce) { running = true; raf = requestAnimationFrame(draw); } }
+    function pause() { running = false; if (raf) cancelAnimationFrame(raf); }
+
+    resize();
+    draw(performance.now());                 // paint one frame immediately (and the only frame if reduced-motion)
+    if (!reduce) {
+      play();
+      document.addEventListener('visibilitychange', function () { document.hidden ? pause() : play(); });
+    }
+  })();
 </script>
 </body>
 </html>
